@@ -4,12 +4,12 @@ import { userLogin, userLogout, userRegister } from "./userAction";
 // initialize TOKEN from local storage
 const userJson = localStorage.getItem("user");
 const user = JSON.parse(userJson)?.data || null;
-// // const token = JSON.parse(userJson)?.meta.token || null;
+// const token = JSON.parse(userJson)?.meta.token || null;
 
 const initialState = {
   loading: false,
   user: user,
-  // // token: token,
+  // token: token,
   error: null,
   success: false,
 };
@@ -28,7 +28,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = payload;
       state.success = true;
-      // // state.token = payload.token;
+      // state.token = payload.token;
     },
     [userRegister.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -42,7 +42,7 @@ const userSlice = createSlice({
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.user = payload;
-      // // state.token = payload.token;
+      // state.token = payload.token;
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -51,7 +51,7 @@ const userSlice = createSlice({
     [userLogout.fulfilled]: (state) => {
       state.loading = false;
       state.user = null;
-      // state.token = null;
+      state.token = null;
       state.error = null;
     },
   },

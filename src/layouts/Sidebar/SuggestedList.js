@@ -16,6 +16,7 @@ function SuggestedList() {
     } else {
       setPerpage(5);
     }
+    // console.log(perpage);
   };
 
   const axiosInstance = axios.create({
@@ -66,7 +67,6 @@ function SuggestedList() {
       onClick={handleSeeMore}
       perpage={perpage}
     />
-    // <div>List Suggested accounts</div>
   );
 }
 

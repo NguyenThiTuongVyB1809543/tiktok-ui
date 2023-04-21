@@ -20,6 +20,6 @@ Make Your Day
 - Infinite loading list video
 - Interact and watch videos like Tiktok
 - Detail Video Page Modal
-- Dảk theme
+- Dark theme
 - ...
  

@@ -45,19 +45,18 @@ function Video({ data }) {
         });
     }
   }, []);
-
+  // console.log(data.file_url);
   return (
     <video
       className={videoTime < 30 ? styles.video_short : ""}
       controls={showControls}
-      // src={data.file_url}
-      // src="src/assets/video/cat.mp4"
+      src={data.file_url}
       muted
       ref={videoRef}
       disablePictureInPicture
       controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"
       onMouseEnter={handleShowControls}
-      // poster={data.thumb_url || ""}
+      poster={data.thumb_url || ""}
       onClick={handlePauseVideo}
       loop
       autoPlay

@@ -53,7 +53,7 @@ function Login() {
           password,
         });
         user && localStorage.setItem("user", JSON.stringify(user));
-        // console.log(user);
+        console.log(user);
         // return user.data;
         return user;
       } catch (error) {

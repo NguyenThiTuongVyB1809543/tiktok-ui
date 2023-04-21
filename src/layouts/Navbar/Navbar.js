@@ -56,7 +56,8 @@ function Navbar() {
 
   const Post = async (url, data, options = {}) => {
     const response = await axiosInstance.post(url, data, options); 
-    return response.data;
+    const token = response.data.token;
+    return token;
   };
 
   const Logout = async () => {
@@ -137,7 +138,8 @@ function Navbar() {
                 <Image
                   className={styles.dropdown_avatar}
                   // src={user.avatar}
-                  src={srcAvatar + user.avatar}
+                  // src={srcAvatar + user.avatar}
+                  src={user.avatar}
                   alt="Avatar"
                 />
               </Menu>

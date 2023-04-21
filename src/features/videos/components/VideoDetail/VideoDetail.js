@@ -5,8 +5,11 @@ import ListComment from "~/features/comments/components/ListComment";
 import { useParams } from "react-router-dom";
 import { videosService } from "../../services/videosService";
 import Loader from "~/components/Core/Loader";
+import styles2 from "../../components/ContentVideo/ContentVideo.module.scss";
+
 
 function VideoDetail({ data }) {
+  console.log(data);
   const [video, setVideo] = useState(data);
   const params = useParams();
 
@@ -28,6 +31,9 @@ function VideoDetail({ data }) {
       return <Loader />;
     }
   }
+  // console.log(video.thumb_url);
+ 
+
 
   return (
     <div className={styles.wrapper}>
@@ -36,7 +42,7 @@ function VideoDetail({ data }) {
         <div className={styles.video_wrapper}>
           <div className={styles.video}>
             {/* Chỗ này là chỗ có comment */}
-            <Video data={video} />
+            <Video data={video} /> 
           </div>
         </div>
       </div>

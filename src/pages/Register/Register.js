@@ -70,7 +70,8 @@ function Register() {
 
   const submitForm = (data) => {
     // dispatch(userRegister(data)); 
-    dispatch(userRegister(data)); 
+    dispatch(userRegister(data));
+    // console.log(data); 
   };
 
   return (

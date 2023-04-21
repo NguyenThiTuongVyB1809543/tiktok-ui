@@ -8,9 +8,9 @@ export const suggestedList = async (page = 1, perpage = 5) => {
         per_page: perpage,
       },
     });
-    console.log(res);
-    // return res.data;
-    return res;
+    // console.log(res);
+    return res.data;
+    // return res;
   } catch (err) {
     console.log(err);
   }

@@ -51,10 +51,7 @@ function Profile() {
     } catch (err) {
       console.log(err);
     }
-  };
-
-
-
+  }; 
   useEffect(() => {
     const fetchApi = async () => {
       const result = await User(nickname);
@@ -65,6 +62,16 @@ function Profile() {
 
     fetchApi();
   }, [nickname, userRedux, user.is_followed]);
+
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     const result = await getUsersService.user(nickname);
+  //     setUser(result);
+  //     setLoading(false);
+  //   };
+
+  //   fetchApi();
+  // }, [nickname, userRedux, user.is_followed]);
 
   const handleVideoPlay = (e) => {
     e.target.play();
@@ -86,14 +93,15 @@ function Profile() {
   const srcAvatar = "src/assets/images/";
   const srcVideo = "src/assets/video/";
   // console.log(user.avatar);
-  const videotemp = "cat.mp4";
+  // console.log(user.videos);
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         
         <div className={styles.info}>
           <Image
-            src={srcAvatar + user.avatar}
+            src={user.avatar}
+            // src={srcAvatar + user.avatar}
             // src= {srcAvatar + "Avatar2.jpg"} //hình đại diện
             width={116}
             height={116}
@@ -172,7 +180,7 @@ function Profile() {
         </div>
         <div className={styles.list_video_container}>
           <div className={styles.list_video}>
-            {/* {user?.videos?.map((video) => (
+            {user?.videos?.map((video) => (
               <Link
                 key={video.id}
                 to={config.routes.videoLink(video)}
@@ -197,7 +205,7 @@ function Profile() {
                   </div>
                 </div>
               </Link>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>

@@ -18,8 +18,8 @@ function AccountItem({ user, onClick }) {
         >
           <Image
             className={styles.account_item_avatar}
-            // src={user.avatar}
-            src={srcAvatar + user.avatar}
+            src={user.avatar}
+            // src={srcAvatar + user.avatar} 
             alt={user.full_name}
           />
           <div className={styles.account_item_info}>

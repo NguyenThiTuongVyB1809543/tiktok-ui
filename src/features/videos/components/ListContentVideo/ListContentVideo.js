@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Loader from "../../../../components/Core/Loader";
 import ContentVideo from "../ContentVideo";
 
+import axios from "axios";
 
 
 
@@ -15,9 +16,39 @@ function ListContentVideo({ type }) {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(2);
 
+  const axiosInstance = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+  });
+
+  const Get = async (url, options = {}) => {
+    try {
+      const response = await axiosInstance.get(url, options);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const GetListVideo = async (type = "for-you", page = 1) => {
+    try {
+      const res = await Get("videos", {
+        params: {
+          type,
+          page,
+        },
+      });
+      // console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
   useEffect(() => {
     const getListVideo = async () => {
-      const result = await videosService.getListVideo(type);
+      const result = await GetListVideo(type);
       setListVideo(result);
     };
 
@@ -25,20 +56,19 @@ function ListContentVideo({ type }) {
   }, [user]);
 
   const fetchListVideo = async () => {
-    const result = await videosService.getListVideo(type, page);
+    const result = await GetListVideo(type, page);
     return result;
   };
 
   const fetchData = async () => {
     const listVideoNext = await fetchListVideo();
-
     setListVideo([...listVideo, ...listVideoNext]);
     if (listVideoNext.length === 0) {
       setHasMore(false);
     }
     setPage((prev) => prev + 1);
   };
-
+  // console.log(listVideo);
   return (
     <div className={styles.main_container}>
       <InfiniteScroll
@@ -52,8 +82,6 @@ function ListContentVideo({ type }) {
         {listVideo.map((video) => (
           <div key={video.id}>
             <ContentVideo data={video} />
-            {/* <video src="src/assets/video/cat.mp4" autoPlay loop muted> 
-            </video> */}
           </div>
         ))}
       </InfiniteScroll>

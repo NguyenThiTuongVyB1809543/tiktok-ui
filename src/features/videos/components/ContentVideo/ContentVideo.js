@@ -19,7 +19,10 @@ import Image from "~/components/Image";
 function ContentVideo({ data }) {
   const [content, setContent] = useState(data);
   const [user, setUser] = useState(content.user);
+  console.log(content);
   const profileLink = config.routes.profileLink(user.nickname);
+
+  
 
   useEffect(() => {
     setUser(content.user);
@@ -43,8 +46,9 @@ function ContentVideo({ data }) {
     <div>
       <div className={styles.suggest_item}>
         <Link to={profileLink}>
-          {/* <Image className={styles.avatar} src={user.avatar} alt="" /> */}
-          <Image className={styles.avatar} src="/src/assets/images/Avatar2.jpg" alt="" />
+        {/* <Link to=""> */}
+          <Image className={styles.avatar} src={user.avatar} alt="" />
+          {/* <Image className={styles.avatar} src="/src/assets/images/Avatar2.jpg" alt="" /> */}
         </Link>
         <div className={styles.content}>
           <div className={styles.info_containter}>
@@ -52,84 +56,88 @@ function ContentVideo({ data }) {
               <div className={styles.author_container}>
                 <div className={styles.author}>
                   <Link to={profileLink}>
+                  {/* <Link to="{profileLink}"> */}
                     <h3 className={styles.username}>
-                      {/* {user.nickname} */}
-                      Tường Di
+                      {user.nickname}
+                      {/* Tường Di */}
                       {user.tick && <Image src={Verify} alt="" />}
                     </h3>
                     <h3 className={styles.name}>{getFullName(user)}</h3>
+                    {/* <h3 className={styles.name}>Tường Di</h3> */}
                   </Link>
                 </div>
               </div>
 
               <span className={styles.video_desc}>
-                {/* {content.description} */}
-                video.description
+                {content.description}
+                {/* video.description */}
               </span>
 
               <h4 className={styles.video_music}>
                 <FaMusic className={styles.icon_music} />
-                {/* {content.music || `Nhạc nền - ${getFullName(user)}`} */}
-                video.music
+                {content.music || `Nhạc nền - ${getFullName(user)}`}
+                {/* {content.music || `Nhạc nền - `} */}
+                {/* video.music */}
               </h4>
             </div>
             <WrapperAuth>
-              {/* <div className={styles.follow_button} onClick={handleFollow}> */}
-              <div className={styles.follow_button} >
-                {/* {user.is_followed ? (
+              <div className={styles.follow_button} onClick={handleFollow}>
+               
+        
+                {user.is_followed ? (
                   <Button outline className={styles.followed}>
                     Following
                   </Button>
                 ) : (
                   <Button outline>Follow</Button>
-                )} */}
+                )}
               </div>
             </WrapperAuth>
           </div>
           <div className={styles.video_wrapper}>
             <Link
-              // to={config.routes.videoLink(content)}
-              // state={{
-              //   videoDetail: true,
-              //   video: content,
-              //   prevPath: location.pathname,
-              // }}
+              to={config.routes.videoLink(content)}
+              state={{
+                videoDetail: true,
+                video: content,
+                prevPath: location.pathname,
+              }}
             >
               <div className={styles.video_card}> 
                 {/* Chổ này ở ngoài trang chủ */}
-                {/* <Video data={content}  /> */}
+                <Video data={content}  />
               </div>
             </Link>
             <div className={styles.action_items}>
               <div className={styles.action_button}>
                 <WrapperAuth>
                   <div
-                    // className={
-                    //   content.is_liked
-                    //     ? `${styles.icon} ${styles.liked}`
-                    //     : `${styles.icon}`
-                    // }
-                    // onClick={() => handleLike(content)}
-                  >
+                    className={
+                      content.is_liked
+                        ? `${styles.icon} ${styles.liked}`
+                        : `${styles.icon}`
+                    }
+                    onClick={() => handleLike(content)}
+                  > 
                     <IoHeart />
                   </div>
                 </WrapperAuth>
                 <strong className={styles.count}>{content.likes_count}</strong>
               </div>
               <Link
-                // to={config.routes.videoLink(content)}
-                // state={{
-                //   videoDetail: true,
-                //   video: content,
-                //   prevPath: location.pathname,
-                // }}
+                to={config.routes.videoLink(content)}
+                state={{
+                  videoDetail: true,
+                  video: content,
+                  prevPath: location.pathname,
+                }}
               >
                 <div className={styles.action_button}>
                   <div className={styles.icon}>
                     <FaCommentDots />
                   </div>
                   <strong className={styles.count}>
-                    {/* {content.comments_count} */}
+                    {content.comments_count}
                   </strong>
                 </div>
               </Link>
@@ -142,8 +150,8 @@ function ContentVideo({ data }) {
                     </div>
                   </Menu>
                 </div>
-                {/* <strong className={styles.count}>{content.shares_count}</strong> */}
-                <strong className={styles.count}>shares_count</strong>
+                <strong className={styles.count}>{content.shares_count}</strong>
+                {/* <strong className={styles.count}>shares_count</strong> */}
               </div>
             </div>
           </div>
@@ -160,3 +168,7 @@ ContentVideo.prototype = {
 };
 
 export default memo(ContentVideo);
+
+
+
+

@@ -6,6 +6,10 @@ import Loader from "~/components/Core/Loader";
 import { UploadIcon } from "~/components/Icons";
 import { videosService } from "~/features/videos/services/videosService";
 import styles from "./Upload.module.scss";
+import axios from "axios";
+
+
+
 
 function Upload() {
   const [filePreview, setFilePreview] = useState("");
@@ -22,16 +26,41 @@ function Upload() {
     setFile(e.target.files[0]);
   };
 
+
+
+  const axiosInstance = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+  });
+  const Post = async (url, data, options = {}) => {
+    const response = await axiosInstance.post(url, data, options); 
+    return response.data; 
+  };
+  const PostVideo = async (formData) => {
+    try {
+      await Post("videos", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+
   const handleUploadVideo = async (data) => {
     setIsLoading(true);
-    await videosService.postVideo(data);
+    await PostVideo(data);
     setIsLoading(false);
-    navigate("/");
+    navigate("/upload");
+    // console.log(data);
   };
 
   const submitForm = (data) => {
+    // console.log(data);
     const fullData = { ...data, upload_file: file };
-
+    console.log(fullData);
     const formData = new FormData();
 
     for (const key in fullData) {
@@ -45,7 +74,8 @@ function Upload() {
       }
     }
 
-    handleUploadVideo(formData);
+    handleUploadVideo(formData); 
+    console.log(formData);
   };
 
   return (
