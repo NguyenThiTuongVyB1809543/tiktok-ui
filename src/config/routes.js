@@ -10,7 +10,7 @@ export const routes = {
   login: "/login",
   register: "/register",
   video: "/@:nickname/videos/:id",
-  // videoLink: (content) => `/${content._id}`,
+  // videoLink: (content) => `/${content.file_url}`,
   videoLink: (content) => `/@${content.user.nickname}/videos/${content._id}`,
   comment: "/videos/:id/comments",
 };

@@ -14,11 +14,11 @@ function App() {
   const location = useLocation();
   const videoDetail = location.state && location.state.videoDetail;
   const { user } = useSelector((state) => state.user);
-
+  console.log(videoDetail);
   return (
     <div className="App">
       <Suspense fallback={<Loader />}>
-        <Routes location={videoDetail || location}>
+        <Routes location={videoDetail || location }>
           {publicRoutes.map((route, index) => {
             const Page = route.component;
             let Layout = DefaultLayout;

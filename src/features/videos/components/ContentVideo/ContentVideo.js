@@ -19,7 +19,7 @@ import Image from "~/components/Image";
 function ContentVideo({ data }) {
   const [content, setContent] = useState(data);
   const [user, setUser] = useState(content.user);
-  console.log(content);
+  console.log('Content:',content);
   const profileLink = config.routes.profileLink(user.nickname);
 
   

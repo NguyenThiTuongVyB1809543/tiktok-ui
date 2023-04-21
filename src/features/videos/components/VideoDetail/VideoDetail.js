@@ -31,7 +31,7 @@ function VideoDetail({ data }) {
       return <Loader />;
     }
   }
-  // console.log(video.thumb_url);
+  console.log('video detail: ',video.file_url);
  
 
 
@@ -46,7 +46,7 @@ function VideoDetail({ data }) {
           </div>
         </div>
       </div>
-      <ListComment video={video} />
+      {/* <ListComment video={video} /> */}
     </div>
   );
 }

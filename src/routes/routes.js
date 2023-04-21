@@ -26,6 +26,7 @@ const publicRoutes = [
     component: ModalVideo,
     layout: HeaderOnly,
   },
+  
   { path: "*", component: NotFound, layout: null },
   // { path: config.routes.following, component: Following },
   // { path: config.routes.profile, component: Profile },

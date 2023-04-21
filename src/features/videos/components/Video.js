@@ -45,7 +45,7 @@ function Video({ data }) {
         });
     }
   }, []);
-  // console.log(data.file_url);
+  // console.log('file_url', data.file_url)
   return (
     <video
       className={videoTime < 30 ? styles.video_short : ""}
