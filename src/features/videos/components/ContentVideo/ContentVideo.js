@@ -22,7 +22,7 @@ function ContentVideo({ data }) {
   console.log('Content:',content);
   const profileLink = config.routes.profileLink(user.nickname);
 
-  
+  console.log('profileLink:', profileLink);
 
   useEffect(() => {
     setUser(content.user);

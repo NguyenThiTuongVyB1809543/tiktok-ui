@@ -11,7 +11,7 @@ import Error from "~/components/Core/Error";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
+   
 function Login() {
   const { loading, user, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function Login() {
   });
   const Post = async (url, data, options = {}) => {
     const response = await axiosInstance.post(url, data, options);  
-    // console.log(response.data);
+    console.log('response.data: ',response.data);
     return response.data;
   };
   const Login = async ({ email, nickname, password }) => {
@@ -39,7 +39,7 @@ function Login() {
       nickname,
       password,
     }); 
-    // console.log(res);
+    console.log('res: ',res);
     return res;
   };
 
@@ -54,8 +54,8 @@ function Login() {
         });
         user && localStorage.setItem("user", JSON.stringify(user));
         console.log(user);
-        // return user.data;
-        return user;
+        return user.data;
+        // return user;
       } catch (error) {
         if (error.response && error.response.data.message) {
           return rejectWithValue(error.response.data.message);
@@ -67,7 +67,7 @@ function Login() {
   );
   const submitForm = (data) => {
     dispatch(userLogin(data));
-    // console.log(data);
+    console.log('data: ',data);
   };
 
   return (

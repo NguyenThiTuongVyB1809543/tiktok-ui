@@ -32,6 +32,7 @@ import axios from "axios";
 
 function Navbar() {
   const { user } = useSelector((state) => state.user);
+  // console.log('user in login: ',user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,25 +51,25 @@ function Navbar() {
     }
   });
   
-  const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
-  });
+  // const axiosInstance = axios.create({
+  //   baseURL: import.meta.env.VITE_BASE_URL,
+  // });
 
-  const Post = async (url, data, options = {}) => {
-    const response = await axiosInstance.post(url, data, options); 
-    const token = response.data.token;
-    return token;
-  };
+  // const Post = async (url, data, options = {}) => {
+  //   const response = await axiosInstance.post(url, data, options); 
+  //   const token = response.data.token;
+  //   return token;
+  // };
 
-  const Logout = async () => {
-    await Post(config.authApi.logout);
-  };
-  const userLogout = createAsyncThunk(
-    config.authApi.logout, async () => {
-      await Logout();
-      localStorage.removeItem("user");
-    }
-  );
+  // const Logout = async () => {
+  //   await Post(config.authApi.logout);
+  // };
+  // const userLogout = createAsyncThunk(
+  //   config.authApi.logout, async () => {
+  //     await Logout();
+  //     localStorage.removeItem("user");
+  //   }
+  // );
 
   const handleMenuChange = (menuItem) => {
     switch (menuItem.type) {

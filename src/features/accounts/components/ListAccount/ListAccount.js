@@ -9,7 +9,7 @@ function ListAccount({ title, list, onClick, perpage }) {
       <div className={styles.sidebar_list}>
         <p className={styles.account_title}>{title}</p>
         {list?.map((user) => (
-          <AccountItem user={user} key={user.id} />
+          <AccountItem user={user} key={user._id} />
         ))}
         <div>
           <p className={styles.sidebar_seeAll} onClick={onClick}>

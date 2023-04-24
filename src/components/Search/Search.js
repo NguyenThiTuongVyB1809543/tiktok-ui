@@ -7,6 +7,8 @@ import { FaSearch, FaSpinner, FaTimesCircle } from "react-icons/fa";
 import styles from "./Search.module.scss";
 import { searchService } from "~/services/searchService";
 import { useDebounce } from "use-debounce";
+import axios from "axios";
+
 
 function Search() {
   const [searchValue, setSearchValue] = useState("");
@@ -45,10 +47,39 @@ function Search() {
       return;
     }
 
+    const axiosInstance = axios.create({
+      baseURL: import.meta.env.VITE_BASE_URL,
+    });
+    const Get = async (url, options = {}) => {
+      try {
+        const response = await axiosInstance.get(url, options);
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+
+    const GetSearch = async (q, type = "less") => {
+      try {
+        const res = await Get("users/search", {
+          params: {
+            q,
+            type,
+          },
+        });
+        // console.log('response:  ',res);
+        // return res.data;
+        return res;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     const fetchApi = async () => {
       setIsLoading(true);
 
-      const result = await searchService.getSearch(debounceSearchValue);
+      const result = await GetSearch(debounceSearchValue);
       setSearchResult(result);
 
       setIsLoading(false);
@@ -70,7 +101,7 @@ function Search() {
               {searchResult.map((item) => (
                 <AccountItem
                   user={item}
-                  key={item.id}
+                  key={item._id}
                   onClick={handleHideResult}
                 />
               ))}

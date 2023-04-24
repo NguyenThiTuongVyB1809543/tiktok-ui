@@ -8,7 +8,7 @@ export const videoApi = createApi({
       const user = getState().user;
 
       if (user && endpoint !== "refresh") {
-        headers.set("Authorization", `Bearer ${user.token}`);
+        headers.set("x_authorization", `${user.token}`);
       }
       return headers;
     },

@@ -15,6 +15,7 @@ export const get = async (url, options = {}) => {
 
 export const post = async (url, data, options = {}) => {
   const response = await axiosInstance.post(url, data, options); 
+  console.log('response.data: ',response.data);
   return response.data;
 };
 
@@ -25,9 +26,9 @@ export const remove = async (url, data, options = {}) => {
 
 axiosInstance.interceptors.request.use(function (config) {
   const token =
-    "Bearer " + JSON.parse(localStorage.getItem("user"))?.meta.token;
+    JSON.parse(localStorage.getItem("user"))?.meta.token;
   if (token) {
-    config.headers.Authorization = token;
+    config.headers.x_authorization = token;
   }
   return config;
 });

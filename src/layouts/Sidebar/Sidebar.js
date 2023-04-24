@@ -35,7 +35,7 @@ function Sidebar() {
 
         <SuggestedList />
 
-        {user && <FollowingList />}
+        {/* {user && <FollowingList />} */}
 
          
         

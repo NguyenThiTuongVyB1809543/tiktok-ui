@@ -1,9 +1,10 @@
 import { config } from "~/config";
 import { request } from "~/utils/axiosInstance";
 
-export const register = async ({ email, password, type }) => {
+export const register = async ({ email,  nickname, password, type }) => {
   const res = await request.post(config.authApi.register, {
     email,
+    nickname,
     password,
     type,
   });
@@ -16,7 +17,7 @@ export const login = async ({ email, password }) => {
     email,
     password,
   });
-  // console.log(res.json());
+  console.log('login: ',res);
   return res;
 };
 

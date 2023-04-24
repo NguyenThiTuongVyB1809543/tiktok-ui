@@ -10,8 +10,7 @@ export const userLogin = createAsyncThunk(
         email,
         password,
       });
-      user && localStorage.setItem("user", JSON.stringify(user));
-      //  console.log(user.data);
+      user && localStorage.setItem("user", JSON.stringify(user)); 
       return user.data;
       // return user;
     } catch (error) {
@@ -26,16 +25,18 @@ export const userLogin = createAsyncThunk(
 
 export const userRegister = createAsyncThunk(
   config.authApi.register,
-  async ({ email, password, type }, { rejectWithValue }) => {
+  async ({ email, nickname, password, type }, { rejectWithValue }) => {
     try {
       const user = await userService.register({
         email,
+        nickname,
         password,
         type,
       });
       user && localStorage.setItem("user", JSON.stringify(user));
-      // console.log(user.data);
+      console.log('user.data: ',user.data);
       return user.data;
+      // return user;
     } catch (error) {
       if (error.response && error.response.data.errors) {
         return rejectWithValue(error.response.data.errors);

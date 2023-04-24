@@ -68,7 +68,7 @@ function ListContentVideo({ type }) {
     }
     setPage((prev) => prev + 1);
   };
-  // console.log(listVideo);
+  console.log('listVideo: ',listVideo);
   return (
     <div className={styles.main_container}>
       <InfiniteScroll
@@ -80,7 +80,7 @@ function ListContentVideo({ type }) {
         style={{ overflow: "inherit" }}
       >
         {listVideo.map((video) => (
-          <div key={video.id}>
+          <div key={video._id}>
             <ContentVideo data={video} />
           </div>
         ))}

@@ -11,10 +11,12 @@ import { useSelector } from "react-redux";
 import Loader from "./components/Core/Loader";
 
 function App() {
+   
+
+
   const location = useLocation();
   const videoDetail = location.state && location.state.videoDetail;
-  const { user } = useSelector((state) => state.user);
-  console.log(videoDetail);
+  const { user } = useSelector((state) => state.user); 
   return (
     <div className="App">
       <Suspense fallback={<Loader />}>

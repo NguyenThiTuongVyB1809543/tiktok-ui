@@ -16,8 +16,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { config } from "~/config";  
 
 import axios from "axios";
-  
-
+   
 
 function Profile() { 
   const { user: userRedux } = useSelector((state) => state.user);
@@ -94,6 +93,9 @@ function Profile() {
   const srcVideo = "src/assets/video/";
   // console.log(user.avatar);
   // console.log(user.videos);
+
+  
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -144,11 +146,21 @@ function Profile() {
                   )}
                 </div>
               </WrapperAuth>
-            ) : (
-              <div className={styles.button_container}>
-                <Button text leftIcon={<FaRegEdit />}>
-                  Edit profile
-                </Button>
+            ) : 
+            (
+              
+              <div className={styles.button_container}  >
+                  <Button text leftIcon={<FaRegEdit />} >
+                      <Link  to={config.routes.editProfileLink(user.nickname)}  >
+                          Edit profile
+                      </Link>
+                  </Button>  
+                
+
+
+
+
+
               </div>
             )}
           </div>
@@ -182,7 +194,7 @@ function Profile() {
           <div className={styles.list_video}>
             {user?.videos?.map((video) => (
               <Link
-                key={video.id}
+                key={video._id}
                 to={config.routes.videoLink(video)}
                 state={{
                   videoDetail: true,

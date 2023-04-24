@@ -11,6 +11,7 @@ const Home = lazy(() => import("~/pages/Home"));
 const Live = lazy(() => import("~/pages/Live"));
 const NotFound = lazy(() => import("~/pages/NotFound"));
 const Profile = lazy(() => import("~/pages/Profile"));
+const EditProfile = lazy(() => import("~/pages/EditProfile"));
 const Upload = lazy(() => import("~/pages/Upload"));
 const Login = lazy(() => import("~/pages/Login"));
 const Register = lazy(() => import("~/pages/Register"));
@@ -27,15 +28,13 @@ const publicRoutes = [
     layout: HeaderOnly,
   },
   
-  { path: "*", component: NotFound, layout: null },
-  // { path: config.routes.following, component: Following },
-  // { path: config.routes.profile, component: Profile },
-  // { path: config.routes.upload, component: Upload, layout: HeaderOnly },
+  { path: "*", component: NotFound, layout: null }, 
 ];
 
 const privateRoutes = [
   { path: config.routes.following, component: Following },
   { path: config.routes.profile, component: Profile },
+  { path: config.routes.editprofile, component: EditProfile },
   { path: config.routes.upload, component: Upload, layout: HeaderOnly },
 ];
 

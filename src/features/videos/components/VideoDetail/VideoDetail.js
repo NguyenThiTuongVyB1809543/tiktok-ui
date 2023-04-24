@@ -46,7 +46,7 @@ function VideoDetail({ data }) {
           </div>
         </div>
       </div>
-      {/* <ListComment video={video} /> */}
+      <ListComment video={video} />
     </div>
   );
 }

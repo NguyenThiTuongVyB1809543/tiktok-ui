@@ -31,7 +31,7 @@ function Register() {
   });
   const Post = async (url, data, options = {}) => {
     const response = await axiosInstance.post(url, data, options); 
-    console.log(response.data);
+    console.log('1:  ',response.data);
     return response.data;
   };
   const Register = async ({ email, nickname, password, type }) => {
@@ -41,7 +41,7 @@ function Register() {
       password,
       type,
     });
-    // console.log(res);
+    console.log('2:  ',res);
     return res;
   };
   const userRegister = createAsyncThunk(
@@ -55,7 +55,7 @@ function Register() {
           type,
         });
         user && localStorage.setItem("user", JSON.stringify(user));
-        // console.log(user);
+        console.log('3:  ',user);
         // return user.data;
         return user;
       } catch (error) {

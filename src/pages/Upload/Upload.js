@@ -6,77 +6,72 @@ import Loader from "~/components/Core/Loader";
 import { UploadIcon } from "~/components/Icons";
 import { videosService } from "~/features/videos/services/videosService";
 import styles from "./Upload.module.scss";
-import axios from "axios";
-
-
-
 
 function Upload() {
   const [filePreview, setFilePreview] = useState("");
   const [file, setFile] = useState("");
-  const [caption, setCaption] = useState("");
+  const [description, setDescription] = useState("");
   const { register, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [namefile, setNameFile] = useState("");
+  const [music, setMusic] = useState("");
+  
 
-  const navigate = useNavigate();
-
+  const navigate = useNavigate(); 
   const handleFile = (e) => {
     const src = URL.createObjectURL(e.target.files[0]);
+    const namefile = e.target.files[0].name;
+    setNameFile(namefile);
+    console.log('e.target.files[0].name:   ', e.target.files[0].name);
     setFilePreview(src);
     setFile(e.target.files[0]);
   };
 
-
-
-  const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
-  });
-  const Post = async (url, data, options = {}) => {
-    const response = await axiosInstance.post(url, data, options); 
-    return response.data; 
-  };
-  const PostVideo = async (formData) => {
-    try {
-      await Post("videos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
-
   const handleUploadVideo = async (data) => {
     setIsLoading(true);
-    await PostVideo(data);
+    await videosService.postVideo(data);
+    // console.log(data);
     setIsLoading(false);
     navigate("/upload");
-    // console.log(data);
   };
 
+  // const submitForm = (data) => {
+  //   const fullData = { ...data, upload_file: file };
+
+  //   const formData = new FormData();
+
+  //   for (const key in fullData) {
+  //     if (key === "allows") {
+  //       if (fullData[key])
+  //         fullData.allows.forEach(function (value) {
+  //           formData.append("allows[]", value);
+  //         });
+  //     } else {
+  //       formData.append(key, fullData[key]);
+  //     }
+  //   }
+
+  //   handleUploadVideo(formData);
+  // };
   const submitForm = (data) => {
-    // console.log(data);
-    const fullData = { ...data, upload_file: file };
-    console.log(fullData);
-    const formData = new FormData();
-
-    for (const key in fullData) {
-      if (key === "allows") {
-        if (fullData[key])
-          fullData.allows.forEach(function (value) {
-            formData.append("allows[]", value);
-          });
-      } else {
-        formData.append(key, fullData[key]);
+      const fullData = { namefile, description, music  }; 
+      for (const key in fullData) {
+        if (key === "allows") {
+          if (fullData[key])
+            fullData.allows.forEach(function (value) {
+              formData.append("allows[]", value);
+            });
+        } else {
+          formData.append(key, fullData[key]);
+        }
       }
-    }
+  
+      handleUploadVideo(formData);
+    };
+  console.log('namefile:  ', namefile);
+  console.log('description:  ', description);
+  console.log('music:  ', music);
 
-    handleUploadVideo(formData); 
-    console.log(formData);
-  };
 
   return (
     <form onSubmit={handleSubmit(submitForm)} className={styles.upload_wrapper}>
@@ -150,7 +145,7 @@ function Upload() {
               <div className={styles.form_header}>
                 <span className={styles.form_label}>Caption</span>
                 <span className={styles.form_count}>
-                  {caption.length} / 150
+                  {description.length} / 150
                 </span>
               </div>
               <div className={styles.form_footer}>
@@ -159,8 +154,8 @@ function Upload() {
                   name="description"
                   id="description"
                   {...register("description")}
-                  value={caption}
-                  onChange={(e) => setCaption(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   className={styles.form_textarea}
                 />
               </div>
@@ -193,6 +188,8 @@ function Upload() {
                   type="text"
                   placeholder="Music"
                   {...register("music")}
+                  value={music}
+                  onChange={(e) => setMusic(e.target.value)}
                 />
               </div>
             </div>
