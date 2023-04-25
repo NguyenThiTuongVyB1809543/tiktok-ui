@@ -21,8 +21,8 @@ function Register() {
 
   useEffect(() => {
     if (user) {
-      navigate(config.routes.home);
-      // navigate(config.routes.register);
+      // navigate(config.routes.home);
+      navigate(config.routes.login);
     }
   }, [navigate, user]);
 

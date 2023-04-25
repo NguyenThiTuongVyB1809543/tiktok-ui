@@ -26,12 +26,20 @@ export const getVideo = async (id) => {
 
 export const postVideo = async (formData) => {
   try {
-    await request.post("videos", formData, {
+    console.log('formData2: ',formData);
+    await request.post("videos", formData ,
+    // {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // }
+    {
       headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log('formData: ',formData)
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+    );
+    
   } catch (err) {
     console.log(err);
   }

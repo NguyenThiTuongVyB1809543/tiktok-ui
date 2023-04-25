@@ -32,7 +32,8 @@ export const followingList = async (page = 1) => {
 export const user = async (nickname) => {
   try {
     const res = await request.get(`users/@${nickname}`);
-    return res.data;
+    // return res.data;
+    return res;
   } catch (err) {
     console.log(err);
   }

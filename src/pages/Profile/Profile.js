@@ -24,53 +24,17 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const nickname = params.nickname;
+  
 
-  // console.log(nickname);
-
-  const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL,
-  });
-
-  const Get = async (url, options = {}) => {
-    try {
-      const response = await axiosInstance.get(url, options);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
-  const User = async (nickname) => {
-    try {
-      const res = await Get(`users/@${nickname}`);
-      console.log(res);
-      // return res.data;
-      return res;
-    } catch (err) {
-      console.log(err);
-    }
-  }; 
   useEffect(() => {
     const fetchApi = async () => {
-      const result = await User(nickname);
+      const result = await getUsersService.user(nickname);
       setUser(result);
-
       setLoading(false);
     };
 
     fetchApi();
   }, [nickname, userRedux, user.is_followed]);
-
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     const result = await getUsersService.user(nickname);
-  //     setUser(result);
-  //     setLoading(false);
-  //   };
-
-  //   fetchApi();
-  // }, [nickname, userRedux, user.is_followed]);
 
   const handleVideoPlay = (e) => {
     e.target.play();
@@ -91,7 +55,7 @@ function Profile() {
   }
   const srcAvatar = "src/assets/images/";
   const srcVideo = "src/assets/video/";
-  // console.log(user.avatar);
+  console.log(user);
   // console.log(user.videos);
 
   
@@ -121,7 +85,7 @@ function Profile() {
  
             </h4> 
 
-            {userRedux?.id !== user?.id ? (
+            {userRedux?._id !== user?._id ? (
               <WrapperAuth>
                 <div className={styles.button_container}>
                   {user.is_followed ? (
@@ -156,11 +120,7 @@ function Profile() {
                       </Link>
                   </Button>  
                 
-
-
-
-
-
+ 
               </div>
             )}
           </div>
