@@ -22,7 +22,7 @@ function Upload() {
     const src = URL.createObjectURL(e.target.files[0]);
     const namefile = e.target.files[0].name;
     setNameFile(namefile);
-    console.log('e.target.files[0].name:   ', e.target.files[0].name);
+    // console.log('e.target.files[0].name:   ', e.target.files[0].name);
     setFilePreview(src);
     setFile(e.target.files[0]);
   };
@@ -53,24 +53,16 @@ function Upload() {
 
   //   handleUploadVideo(formData);
   // };
+
+
   const submitForm = (data) => {
-      const fullData = { namefile, description, music  }; 
-      for (const key in fullData) {
-        if (key === "allows") {
-          if (fullData[key])
-            fullData.allows.forEach(function (value) {
-              formData.append("allows[]", value);
-            });
-        } else {
-          formData.append(key, fullData[key]);
-        }
-      }
-  
-      handleUploadVideo(formData);
-    };
-  console.log('namefile:  ', namefile);
-  console.log('description:  ', description);
-  console.log('music:  ', music);
+    const fullData = { ...data, namefile };  
+    console.log('fullData:  ', fullData);
+    handleUploadVideo(fullData);
+  };
+  // console.log('namefile:  ', namefile);
+  // console.log('description:  ', description);
+  // console.log('music:  ', music);
 
 
   return (

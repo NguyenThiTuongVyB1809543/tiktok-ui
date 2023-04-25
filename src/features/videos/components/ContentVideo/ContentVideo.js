@@ -19,14 +19,18 @@ import Image from "~/components/Image";
 function ContentVideo({ data }) {
   const [content, setContent] = useState(data);
   const [user, setUser] = useState(content.user);
-  console.log('Content:',content);
+  // console.log('data:',data);
   const profileLink = config.routes.profileLink(user.nickname);
 
-  console.log('profileLink:', profileLink);
+  // console.log('user: ', user);
+  // console.log('usernickname:', user.nickname);
 
   useEffect(() => {
-    setUser(content.user);
-    setContent(content);
+    if(user != null){
+      setUser(content.user);
+      setContent(content);
+    }
+    
   }, [content]);
 
   const handleFollow = async () => {
@@ -41,7 +45,7 @@ function ContentVideo({ data }) {
       ...newContent,
     }));
   };
-
+  // console.log ('user: ', user);
   return (
     <div>
       <div className={styles.suggest_item}>
@@ -97,6 +101,7 @@ function ContentVideo({ data }) {
           <div className={styles.video_wrapper}>
             <Link
               to={config.routes.videoLink(content)}
+              // to="{config.routes.videoLink(content)}"
               state={{
                 videoDetail: true,
                 video: content,
@@ -106,6 +111,7 @@ function ContentVideo({ data }) {
               <div className={styles.video_card}> 
                 {/* Chổ này ở ngoài trang chủ */}
                 <Video data={content}  />
+                
               </div>
             </Link>
             <div className={styles.action_items}>
@@ -126,6 +132,7 @@ function ContentVideo({ data }) {
               </div>
               <Link
                 to={config.routes.videoLink(content)}
+                // to="{config.routes.videoLink(content)}"
                 state={{
                   videoDetail: true,
                   video: content,

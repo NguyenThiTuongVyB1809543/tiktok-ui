@@ -8,7 +8,8 @@ export const getListVideo = async (type = "for-you", page = 1) => {
         page,
       },
     });
-    return res.data;
+    // return res.data;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -30,6 +31,7 @@ export const postVideo = async (formData) => {
         "Content-Type": "multipart/form-data",
       },
     });
+    console.log('formData: ',formData)
   } catch (err) {
     console.log(err);
   }
