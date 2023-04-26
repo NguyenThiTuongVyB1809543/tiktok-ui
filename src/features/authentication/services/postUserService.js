@@ -7,10 +7,10 @@ export const register = async ({ email,  nickname, password, type }) => {
     nickname,
     password,
     type,
-  });
-  // console.log(res.json());
+  }); 
   return res;
 };
+ 
 
 export const login = async ({ email, password }) => {
   const res = await request.post(config.authApi.login, {

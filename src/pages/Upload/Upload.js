@@ -14,8 +14,9 @@ function Upload() {
   const { register, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [namefile, setNameFile] = useState("");
-  const [music, setMusic] = useState("");
-  
+  const [music, setMusic] = useState(""); 
+   
+  const [user, setUser] = useState({});
 
   const navigate = useNavigate(); 
   const handleFile = (e) => {
@@ -35,44 +36,44 @@ function Upload() {
     navigate("/upload");
   };
 
-  const submitForm = (data) => {
-    const fullData = { ...data, upload_file: file }; 
-    const formData = new FormData(); 
-    for (const key in fullData) {
-      if (key === "allows") {
-        if (fullData[key])
-          fullData.allows.forEach(function (value) {
-            formData.append("allows[]", value);
-          });
-      } else {
-        formData.append(key, fullData[key]);
-      }
-    } 
-    // for (const value of formData.values()) {
-    //   console.log('value form data: ',value);
-    // }
-    for(var pair of formData.entries()) {
-      console.log(pair[0]+ ', '+ pair[1]); 
-    }
-    handleUploadVideo(formData);
-  };
-
-
   // const submitForm = (data) => {
-  //   const fullData = { ...data, namefile };  
-  //   console.log('fullData trước vòng for:  ', fullData);
-     
-  //   const formData = new FormData();
-  //   for (const key in fullData) { 
-  //     // console.log('key:  ', key, ', with value: ', fullData[key] ); 
-  //       formData.append(key, fullData[key]); 
-  //       // console.log('formData:  ', formData);
-  //   }
-  //   for (const value of formData.values()) {
-  //     console.log('value form data: ',value);
+  //   const fullData = { ...data, upload_file: file }; 
+  //   const formData = new FormData(); 
+  //   for (const key in fullData) {
+  //     if (key === "allows") {
+  //       if (fullData[key])
+  //         fullData.allows.forEach(function (value) {
+  //           formData.append("allows[]", value);
+  //         });
+  //     } else {
+  //       formData.append(key, fullData[key]);
+  //     }
+  //   } 
+  //   // for (const value of formData.values()) {
+  //   //   console.log('value form data: ',value);
+  //   // }
+  //   for(var pair of formData.entries()) {
+  //     console.log(pair[0]+ ', '+ pair[1]); 
   //   }
   //   handleUploadVideo(formData);
   // };
+
+
+  const submitForm = (data) => {
+    const fullData = { ...data, namefile, user  };  
+    // console.log('fullData trước vòng for:  ', fullData);
+     
+    // const formData = new FormData();
+    // for (const key in fullData) { 
+    //   // console.log('key:  ', key, ', with value: ', fullData[key] ); 
+    //     formData.append(key, fullData[key]); 
+    //     // console.log('formData:  ', formData);
+    // }
+    // for (const value of formData.values()) {
+    //   console.log('value form data: ',value);
+    // }
+    handleUploadVideo(fullData);
+  };
   // console.log('namefile:  ', namefile);
   // console.log('description:  ', description);
   // console.log('music:  ', music);

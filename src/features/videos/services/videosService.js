@@ -34,9 +34,9 @@ export const postVideo = async (formData) => {
     //   },
     // }
     {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+      // headers: {
+      //   'Content-Type': 'application/x-www-form-urlencoded'
+      // }
     }
     );
     

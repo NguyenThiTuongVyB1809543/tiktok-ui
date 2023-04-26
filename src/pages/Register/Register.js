@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.scss";
 import Error from "~/components/Core/Error";
 import { useForm } from "react-hook-form";
@@ -14,16 +14,18 @@ import axios from "axios";
 
 
 function Register() {
-  const { loading, user, error } = useSelector((state) => state.user);
+  const { loading, user, user_data, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  // console.log('navigate: ',navigate);
+   
 
   useEffect(() => {
-    if (user) {
+    if (user_data) {
       // navigate(config.routes.home);
       navigate(config.routes.login);
-    }
+    } 
   }, [navigate, user]);
 
   const axiosInstance = axios.create({
@@ -48,16 +50,16 @@ function Register() {
     config.authApi.register,
     async ({ email, nickname, password, type }, { rejectWithValue }) => {
       try {
-        const user = await Register({
+        const user_data = await Register({
           email,
           nickname,
           password,
           type,
         });
-        user && localStorage.setItem("user", JSON.stringify(user));
-        console.log('3:  ',user);
+        user_data && localStorage.setItem("user", JSON.stringify(user_data));
+        console.log('3:  ',user_data);
         // return user.data;
-        return user;
+        return user_data;
       } catch (error) {
         if (error.response && error.response.data.errors) {
           return rejectWithValue(error.response.data.errors);
@@ -70,6 +72,7 @@ function Register() {
 
   const submitForm = (data) => {
     // dispatch(userRegister(data)); 
+    
     dispatch(userRegister(data));
     // console.log(data); 
   };
@@ -122,10 +125,18 @@ function Register() {
                 : "This account is already registered"}
             </Error>
           )}
+          
+          {user && (
+            <Error>
+              { 
+                 "Đăng kí thành công"}
+            </Error>
+          )}
           <div className="button login">
-            <button type="submit" disabled={loading}>
+            <button type="submit" disabled={loading} >
               <span>Register</span> <i className="fa fa-check"></i>
             </button>
+            
           </div>
         </div>
       </div>
