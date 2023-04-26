@@ -15,8 +15,13 @@ function Upload() {
   const [isLoading, setIsLoading] = useState(false);
   const [namefile, setNameFile] = useState("");
   const [music, setMusic] = useState(""); 
-   
-  const [user, setUser] = useState({});
+
+
+  const user1 = localStorage.getItem("user"); 
+  const user = JSON.parse(user1);
+  // console.log('user: ', user.data._id);
+
+
 
   const navigate = useNavigate(); 
   const handleFile = (e) => {
@@ -33,7 +38,7 @@ function Upload() {
     await videosService.postVideo(data);
     // console.log(data);
     setIsLoading(false);
-    navigate("/upload");
+    navigate("/");
   };
 
   // const submitForm = (data) => {
@@ -60,7 +65,7 @@ function Upload() {
 
 
   const submitForm = (data) => {
-    const fullData = { ...data, namefile, user  };  
+    const fullData = { ...data, namefile, userId: user.data._id  };  
     // console.log('fullData trước vòng for:  ', fullData);
      
     // const formData = new FormData();
