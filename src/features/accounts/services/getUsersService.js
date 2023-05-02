@@ -9,8 +9,8 @@ export const suggestedList = async (page = 1, perpage = 5) => {
       },
     });
     // console.log(res);
-    return res.data;
-    // return res;
+    // return res.data;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -23,6 +23,7 @@ export const followingList = async (page = 1) => {
         page,
       },
     });
+    console.log('res: ', res);
     return res.data;
   } catch (err) {
     console.log(err);

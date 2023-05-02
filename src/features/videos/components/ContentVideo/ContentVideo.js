@@ -45,7 +45,7 @@ function ContentVideo({ data }) {
       ...newContent,
     }));
   };
-  // console.log ('user: ', user);
+  // console.log (' user: ', user);
   return (
     <div>
       <div className={styles.suggest_item}>

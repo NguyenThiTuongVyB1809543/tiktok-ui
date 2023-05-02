@@ -18,11 +18,8 @@ function Upload() {
 
 
   const user1 = localStorage.getItem("user"); 
-  const user = JSON.parse(user1);
-  // console.log('user: ', user.data._id);
-
-
-
+  const user = JSON.parse(user1); 
+ 
   const navigate = useNavigate(); 
   const handleFile = (e) => {
     const src = URL.createObjectURL(e.target.files[0]);
@@ -65,18 +62,7 @@ function Upload() {
 
 
   const submitForm = (data) => {
-    const fullData = { ...data, namefile, userId: user.data._id  };  
-    // console.log('fullData trước vòng for:  ', fullData);
-     
-    // const formData = new FormData();
-    // for (const key in fullData) { 
-    //   // console.log('key:  ', key, ', with value: ', fullData[key] ); 
-    //     formData.append(key, fullData[key]); 
-    //     // console.log('formData:  ', formData);
-    // }
-    // for (const value of formData.values()) {
-    //   console.log('value form data: ',value);
-    // }
+    const fullData = { ...data, namefile, userId: user.data._id  };   
     handleUploadVideo(fullData);
   };
   // console.log('namefile:  ', namefile);
@@ -173,10 +159,10 @@ function Upload() {
             </div>
             <div className={styles.form_item}>
               <div className={styles.form_header}>
-                <span className={styles.form_label}>Cover</span>
+                {/* <span className={styles.form_label}>Cover</span> */}
               </div>
               <div className={styles.form_footer}>
-                <input
+                {/* <input
                   className={styles.form_input}
                   name="thumbnail_time"
                   id="thumbnail_time"
@@ -184,7 +170,7 @@ function Upload() {
                   type="number"
                   placeholder="Thumbnail capture position, units of seconds (Ex: 2)"
                   defaultValue={1}
-                />
+                /> */}
               </div>
             </div>
             <div className={styles.form_item}>
@@ -206,12 +192,12 @@ function Upload() {
             </div>
             <div className={styles.form_item}>
               <div className={styles.form_header}>
-                <span className={styles.form_label}>
+                {/* <span className={styles.form_label}>
                   Who can watch this video
-                </span>
+                </span> */}
               </div>
               <div className={styles.form_footer}>
-                <select
+                {/* <select
                   className={styles.form_select}
                   name="viewable"
                   id="viewable"
@@ -220,16 +206,16 @@ function Upload() {
                   <option value="public">Public</option>
                   <option value="friends">Friends</option>
                   <option value="private">Private</option>
-                </select>
+                </select> */}
               </div>
             </div>
             <div className={styles.form_item}>
               <div className={styles.form_header}>
-                <span className={styles.form_label}>Allow users to:</span>
+                {/* <span className={styles.form_label}>Allow users to:</span> */}
               </div>
               <div className={styles.form_footer}>
                 <div className={styles.form_checkbox}>
-                  <input
+                  {/* <input
                     value="comment"
                     type="checkbox"
                     name="allows"
@@ -237,10 +223,10 @@ function Upload() {
                     defaultChecked
                     {...register("allows")}
                   />
-                  <label htmlFor="">Comment</label>
+                  <label htmlFor="">Comment</label> */}
                 </div>
                 <div className={styles.form_checkbox}>
-                  <input
+                  {/* <input
                     value="duet"
                     type="checkbox"
                     name="allows"
@@ -248,10 +234,10 @@ function Upload() {
                     defaultChecked
                     {...register("allows")}
                   />
-                  <label htmlFor="">Duet</label>
+                  <label htmlFor="">Duet</label> */}
                 </div>
                 <div className={styles.form_checkbox}>
-                  <input
+                  {/* <input
                     value="stitch"
                     type="checkbox"
                     name="allows"
@@ -259,7 +245,7 @@ function Upload() {
                     defaultChecked
                     {...register("allows")}
                   />
-                  <label htmlFor="">Stitch</label>
+                  <label htmlFor="">Stitch</label> */}
                 </div>
               </div>
             </div>

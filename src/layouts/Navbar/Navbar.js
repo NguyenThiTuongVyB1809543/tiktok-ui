@@ -32,7 +32,13 @@ import axios from "axios";
 
 function Navbar() {
   const { user } = useSelector((state) => state.user);
-  // console.log('user in login: ',user);
+
+  const user2 = localStorage.getItem("user"); 
+  const user3 = JSON.parse(user2); 
+
+
+  // console.log('user in login user3: ',user3);
+  // console.log('user in nabar: ',user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,27 +56,7 @@ function Navbar() {
       localStorage.removeItem("theme", "dark");
     }
   });
-  
-  // const axiosInstance = axios.create({
-  //   baseURL: import.meta.env.VITE_BASE_URL,
-  // });
-
-  // const Post = async (url, data, options = {}) => {
-  //   const response = await axiosInstance.post(url, data, options); 
-  //   const token = response.data.token;
-  //   return token;
-  // };
-
-  // const Logout = async () => {
-  //   await Post(config.authApi.logout);
-  // };
-  // const userLogout = createAsyncThunk(
-  //   config.authApi.logout, async () => {
-  //     await Logout();
-  //     localStorage.removeItem("user");
-  //   }
-  // );
-
+   
   const handleMenuChange = (menuItem) => {
     switch (menuItem.type) {
       case "logout":

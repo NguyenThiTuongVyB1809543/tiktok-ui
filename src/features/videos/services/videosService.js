@@ -2,18 +2,45 @@ import { request } from "~/utils/axiosInstance";
 
 export const getListVideo = async (type = "for-you", page = 1) => {
   try {
-    const res = await request.get("videos", {
-      params: {
-        type,
-        page,
-      },
-    });
+       
+    if (localStorage.getItem("user") !== null) {
+        var accessTokenObj = JSON.parse(localStorage.getItem("user"));
+        // console.log('accessTokenObj: ', accessTokenObj.meta.token);
+        
+          const res = await request.get("videos", {
+            params: {
+              type,
+              page,
+            },
+          });
+          return res; 
+    }
+    else {
+      console.log('token is null ');
+      const res = await request.get("videos/show", {
+            params: {
+              type,
+              page,
+            },
+          });
+      return res;
+    }
+    // const res = await request.get("videos/show", {
+    //       params: {
+    //         type,
+    //         page,
+    //       },
+    //     });
+    // return res;
+    
+
     // return res.data;
-    return res;
+    
   } catch (err) {
     console.log(err);
   }
 };
+ 
 
 export const getVideo = async (id) => {
   try {

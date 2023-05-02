@@ -31,7 +31,7 @@ function VideoDetail({ data }) {
       return <Loader />;
     }
   }
-  console.log('video detail: ',video.file_url);
+  // console.log('video detail: ',video.file_url);
  
 
 

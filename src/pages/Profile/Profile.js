@@ -46,16 +46,19 @@ function Profile() {
   };
 
   const handleFollow = async () => {
-    const isFollowed = await handleFollowFunc(user);
-    setUser((user) => ({ ...user, is_followed: isFollowed }));
+    const isFollowed = await handleFollowFunc(user); 
+    setUser(prevUser => ({ ...prevUser, is_followed: isFollowed })); 
   };
+  useEffect(() => {
+    // console.log('user is_followed: ', user.is_followed);
+  }, [user]);
 
   if (loading) {
     return <Loader />;
   }
   const srcAvatar = "src/assets/images/";
   const srcVideo = "src/assets/video/";
-  console.log(user);
+  // console.log('user profile: ',user);
   // console.log(user.videos);
 
   

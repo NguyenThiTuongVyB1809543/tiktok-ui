@@ -1,18 +1,19 @@
 import { request } from "~/utils/axiosInstance";
 
-export const like = async (id) => {
+export const like = async (_id) => {
   try {
-    const res = await request.post(`videos/${id}/like`, id);
-    return res.data;
+    const res = await request.post(`videos/${_id}/like`, _id);
+    // console.log('like: ', res);
+    return res;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const unlike = async (id) => {
+export const unlike = async (_id) => {
   try {
-    const res = await request.post(`videos/${id}/unlike`, id);
-    return res.data;
+    const res = await request.post(`videos/${_id}/unlike`, _id);
+    return res;
   } catch (err) {
     console.log(err);
   }
