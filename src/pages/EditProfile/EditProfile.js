@@ -28,7 +28,7 @@ function EditProfile() {
   const navigate = useNavigate(); 
   const user1 = localStorage.getItem("user"); 
   const user = JSON.parse(user1); 
-  console.log('user: ', user  );
+  // console.log('user: ', user  );
   const initialValues = {
     fullname: user.data.fullname , 
     bio: user.data.bio,
@@ -67,7 +67,7 @@ function EditProfile() {
         avatar: filename,
         userId: user.data._id
       });
-      console.log('Response from backend:', response.data); 
+      // console.log('Response from backend:', response.data); 
       // localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/");
       // navigate("/@"+ user.data.nickname);

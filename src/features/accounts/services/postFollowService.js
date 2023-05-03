@@ -13,7 +13,7 @@ export const follow = async (_id) => {
 export const unfollow = async (_id) => {
   try {
     const res = await request.post(`users/${_id}/unfollow`, _id);
-    console.log('res: ', res);
+    // console.log('res: ', res);
 
     return res;
   } catch (err) {

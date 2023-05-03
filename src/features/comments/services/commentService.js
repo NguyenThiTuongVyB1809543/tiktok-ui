@@ -19,5 +19,14 @@ export const postComment = async (_id, comment) => {
     console.log(err);
   }
 };
+export const deleteComment = async (_id) => {
+  try {
+    console.log('_id comment cần xóa: ', _id);
+    await request.remove(`comments/${_id}`);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export * as commentService from "~/features/comments/services/commentService";

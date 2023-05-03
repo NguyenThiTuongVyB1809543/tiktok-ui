@@ -2,8 +2,10 @@ import { request } from "~/utils/axiosInstance";
 
 export const like = async (_id) => {
   try {
+    // console.log('id comment được thích: ', _id);
+
     const res = await request.post(`comments/${_id}/like`, _id);
-    console.log('like: ', res);
+    // console.log('like: ', res);
     return res;
   } catch (err) {
     console.log(err);

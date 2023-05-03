@@ -7,7 +7,7 @@ import Image from "../../../../components/Image";
 import Loader from "../../../../components/Core/Loader";
 import WrapperAuth from "../../../../components/WrapperAuth";
 import styles from "./ListComment.module.scss";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaEdit, FaTrash } from "react-icons/fa";
 import { config } from "~/config";
 import handleLikeCommentFunc from "~/utils/handleLikeComment";
 import { useSelector } from "react-redux";
@@ -39,16 +39,30 @@ function ListComment({ video }) {
 
     setLoading(false);
   };
+  //delete comment
+  const deleteComment = async (comment) => { 
+    setLoading(true);
+    await commentService.deleteComment(comment._id); 
+    setListComment((prev) => prev.filter((c) => {return c._id !== comment._id }));
+    setLoading(false);
+    // console.log('_id comment cần xóa: ', comment);
+
+  };
+
+  //Edit comment
+  // const editComment = async (comment) => { 
+  //   // await commentService.deleteComment(comment._id); 
+  //   console.log('_id comment cần xóa: ', comment);
+
+  // };
+
+
+
+
 
   // Delete a video
   const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  // console.log('id người đang đăng nhập: ', user._id);
-  // console.log('id người đăng tải video: ', video.user);//từ profile đi vào video
-  // console.log('id người đăng tải video video.user._id: ', video.user._id);//từ ngoài trang chủ vào video
-
-  
-   
+  const navigate = useNavigate(); 
   const deleteVideo = async () => {
     if(user){ 
       if(video.user._id === undefined){
@@ -65,9 +79,9 @@ function ListComment({ video }) {
           navigate(userProfile);
         }
       }
-    }
-    
+    } 
   };
+ 
   let buttonDelete = false;
   if(user){ 
     if(video.user._id === undefined){
@@ -81,15 +95,11 @@ function ListComment({ video }) {
       }
     }
   }
-  const handleLikeComment = async () => {
+ 
+  const handleLikeComment = async (comment) => {  
     const newComment = await handleLikeCommentFunc(comment);
-    setListComment((comment) => ({
-      ...comment,
-      ...newComment,
-    }));
-    console.log('comment: ', comment); 
-    // setComment("");
-    // setListComment((prev) => [newComment, ...prev]); 
+    // console.log('comment được thích: ', comment); 
+    setListComment((prev) => prev.map((c) => c._id === newComment._id ? newComment : c));
     setLoading(false);
   };
 
@@ -126,7 +136,7 @@ function ListComment({ video }) {
                       </Link>
 
                       <p className={styles.comment_text}>{comment.comment}</p>
-                      <p className={styles.created_at}>{comment.created_at}</p>
+                      <p className={styles.created_at}>{comment.createdAt}</p>
                     </div>
                     <div className={styles.action_container}>
                       <div className={styles.like_wrapper}>
@@ -142,6 +152,27 @@ function ListComment({ video }) {
                         </div>
                         <span>{comment.likes_count}</span>
                       </div>
+ 
+                      <div>
+                        {user? (
+                          (user._id === comment.user._id)?(
+                            <div>
+                              {/* <div className={styles.like_wrapper}>
+                                <div onClick={() => editComment(comment)}>
+                                  <FaEdit />
+                                </div> 
+                              </div>  */}
+                              <div className={styles.like_wrapper}>
+                                <div  onClick={() => deleteComment(comment)}>
+                                  <FaTrash />
+                                </div> 
+                              </div>
+                            </div> 
+                          ):(<div></div>)
+                        ) :(<div></div>)
+                      }
+                      </div> 
+
                     </div>
                   </div>
                 </div>
