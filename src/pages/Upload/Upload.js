@@ -90,7 +90,7 @@ function Upload() {
                     <video
                       className={styles.video_preview}
                       src={filePreview}
-                      // autoPlay
+                      autoPlay
                       preload="auto"
                       playsInline=""
                       crossOrigin="anonymous"

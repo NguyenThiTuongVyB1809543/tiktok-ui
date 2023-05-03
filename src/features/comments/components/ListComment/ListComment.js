@@ -9,17 +9,19 @@ import WrapperAuth from "../../../../components/WrapperAuth";
 import styles from "./ListComment.module.scss";
 import { FaRegHeart } from "react-icons/fa";
 import { config } from "~/config";
+import handleLikeCommentFunc from "~/utils/handleLikeComment";
 import { useSelector } from "react-redux";
 import { videosService } from "~/features/videos/services/videosService";
 
 function ListComment({ video }) {
+  // console.log('video: ', video);
   const [listComment, setListComment] = useState({});
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState("");
 
   useEffect(() => {
     const fetchApi = async () => {
-      const result = await commentService.getListComment(video.id);
+      const result = await commentService.getListComment(video._id);
       setListComment(result);
 
       setLoading(false);
@@ -41,13 +43,54 @@ function ListComment({ video }) {
   // Delete a video
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  // console.log('id người đang đăng nhập: ', user._id);
+  // console.log('id người đăng tải video: ', video.user);//từ profile đi vào video
+  // console.log('id người đăng tải video video.user._id: ', video.user._id);//từ ngoài trang chủ vào video
 
+  
+   
   const deleteVideo = async () => {
-    if (user.id === video.user_id) {
-      await videosService.deleteVideo(video.id);
-      const userProfile = config.routes.profileLink(user.nickname);
-      navigate(userProfile);
+    if(user){ 
+      if(video.user._id === undefined){
+        if (user._id === video.user) {
+          await videosService.deleteVideo(video._id);
+          const userProfile = config.routes.profileLink(user.nickname);
+          navigate(userProfile);
+        }
+      }
+      else{
+        if (user._id === video.user._id) {
+          await videosService.deleteVideo(video._id);
+          const userProfile = config.routes.profileLink(user.nickname);
+          navigate(userProfile);
+        }
+      }
     }
+    
+  };
+  let buttonDelete = false;
+  if(user){ 
+    if(video.user._id === undefined){
+      if (user._id === video.user) {
+        buttonDelete = true;
+      }
+    }
+    else{
+      if (user._id === video.user._id) {
+        buttonDelete = true;
+      }
+    }
+  }
+  const handleLikeComment = async () => {
+    const newComment = await handleLikeCommentFunc(comment);
+    setListComment((comment) => ({
+      ...comment,
+      ...newComment,
+    }));
+    console.log('comment: ', comment); 
+    // setComment("");
+    // setListComment((prev) => [newComment, ...prev]); 
+    setLoading(false);
   };
 
   const onFormSubmit = (e) => {
@@ -57,15 +100,19 @@ function ListComment({ video }) {
 
   return (
     <div className={styles.content_container}>
-      <Button type="submit" primary onClick={deleteVideo}>
-        Delete Video
-      </Button>
+      {buttonDelete ? (
+          <Button type="submit" primary onClick={deleteVideo}>
+            Delete Video
+          </Button>
+        ): (<div></div>) 
+      }
+      
       <div className={styles.comment_list_container}>
         {!loading ? (
           listComment ? (
             listComment.length > 0 ? (
               listComment.map((comment) => (
-                <div className={styles.comment_item_container} key={comment.id}>
+                <div className={styles.comment_item_container} key={comment._id}>
                   <div className={styles.comment_content_container}>
                     <Image src={comment.user.avatar} />
                     <div className={styles.comment_container}>
@@ -89,6 +136,7 @@ function ListComment({ video }) {
                               ? `${styles.icon} ${styles.liked}`
                               : `${styles.icon}`
                           }
+                          onClick={() => handleLikeComment(comment)}
                         >
                           <FaRegHeart />
                         </div>

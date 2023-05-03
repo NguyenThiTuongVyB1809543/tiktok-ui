@@ -7,6 +7,7 @@ export const axiosInstance = axios.create({
 export const get = async (url, options = {}) => {
   try {
     const response = await axiosInstance.get(url, options);
+    // console.log('response : ', response);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -21,6 +22,7 @@ export const post = async (url, data, options = {}) => {
 
 export const remove = async (url, data, options = {}) => {
   const response = await axiosInstance.delete(url, data, options);
+  console.log('response.data axiosInstance: ',response.data);
   return response.data;
 };
 

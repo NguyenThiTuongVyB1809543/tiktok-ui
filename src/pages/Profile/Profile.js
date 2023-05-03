@@ -151,11 +151,13 @@ function Profile() {
       <div className={styles.list_video_wrapper}>
         <div className={styles.title_wrapper}>
           <p className={styles.title}>Videos</p>
-          <p className={styles.title}>Liked</p>
+          {/* <p className={styles.title}>Liked</p> */}
+          <p className={styles.title}></p>
         </div>
         <div className={styles.list_video_container}>
           <div className={styles.list_video}>
             {user?.videos?.map((video) => (
+              
               <Link
                 key={video._id}
                 to={config.routes.videoLink(video)}

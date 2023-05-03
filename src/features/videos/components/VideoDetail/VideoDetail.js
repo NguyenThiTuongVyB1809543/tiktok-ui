@@ -9,7 +9,7 @@ import styles2 from "../../components/ContentVideo/ContentVideo.module.scss";
 
 
 function VideoDetail({ data }) {
-  console.log(data);
+  // console.log(data);
   const [video, setVideo] = useState(data);
   const params = useParams();
 

@@ -4,16 +4,15 @@ export const getListVideo = async (type = "for-you", page = 1) => {
   try {
        
     if (localStorage.getItem("user") !== null) {
-        var accessTokenObj = JSON.parse(localStorage.getItem("user"));
-        // console.log('accessTokenObj: ', accessTokenObj.meta.token);
-        
-          const res = await request.get("videos", {
-            params: {
-              type,
-              page,
-            },
-          });
-          return res; 
+        var accessTokenObj = JSON.parse(localStorage.getItem("user")); 
+        // console.log('type: ', type); 
+        const res = await request.get("videos", {
+          params: {
+            type,
+            page,
+          },
+        });
+        return res; 
     }
     else {
       console.log('token is null ');
@@ -40,6 +39,7 @@ export const getListVideo = async (type = "for-you", page = 1) => {
     console.log(err);
   }
 };
+ 
  
 
 export const getVideo = async (id) => {
@@ -75,6 +75,7 @@ export const postVideo = async (formData) => {
 export const deleteVideo = async (id) => {
   try {
     await request.remove(`videos/${id}`);
+
   } catch (err) {
     console.log(err);
   }

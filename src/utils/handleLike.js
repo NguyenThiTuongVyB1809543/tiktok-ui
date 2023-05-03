@@ -7,7 +7,7 @@ const handleLikeFunc = async (video) => {
   } else {
     newVideo = await likeService.like(video._id);
   }
-  console.log('newVideo: ', newVideo);
+  // console.log('newVideo:', newVideo);
   return newVideo;
 };
 
