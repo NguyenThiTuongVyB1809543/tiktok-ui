@@ -9,6 +9,7 @@ export const routes = {
   upload: "/upload",
   search: "/search",
   messages: "/messages",
+  notification: "/notification",
   login: "/login",
   register: "/register",
   video: "/@:nickname/videos/:id",

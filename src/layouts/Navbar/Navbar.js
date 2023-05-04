@@ -35,10 +35,7 @@ function Navbar() {
 
   const user2 = localStorage.getItem("user"); 
   const user3 = JSON.parse(user2); 
-
-
-  // console.log('user in login user3: ',user3);
-  // console.log('user in nabar: ',user);
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -110,22 +107,24 @@ function Navbar() {
           {user ? (
             <>
               <Tippy content="Messages" placement="bottom" theme="gradient">
-                <div className={styles.menu_action}>
-                  <FaRegPaperPlane />
+                <div className={styles.menu_action}> 
+                  <Link to={config.routes.messages}>
+                    <FaRegPaperPlane /> 
+                  </Link>
                 </div>
               </Tippy>
 
-              <Tippy content="Inbox" placement="bottom">
-                <div className={styles.menu_action}>
-                  <FaRegCommentAlt />
+              <Tippy content="Notification" placement="bottom">
+                <div className={styles.menu_action}  >
+                  <Link to={config.routes.notification}>
+                    <FaRegCommentAlt /> 
+                  </Link>
                 </div>
               </Tippy>
 
               <Menu items={MENU_ITEMS_2} onChange={handleMenuChange}>
                 <Image
-                  className={styles.dropdown_avatar}
-                  // src={user.avatar}
-                  // src={srcAvatar + user.avatar}
+                  className={styles.dropdown_avatar} 
                   src={user.avatar}
                   alt="Avatar"
                 />
