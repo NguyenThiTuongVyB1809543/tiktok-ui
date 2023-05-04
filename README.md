@@ -21,5 +21,9 @@ Make Your Day
 - Interact and watch videos like Tiktok
 - Detail Video Page Modal
 - Dark theme
-- ...
+- Like a comment
+- Delete a comment
+- Delete a video
+- Edit profile
+- 
  
