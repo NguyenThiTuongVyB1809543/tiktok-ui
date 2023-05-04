@@ -7,7 +7,7 @@ Make Your Day
 - Test Redux Toolkit
 - Vite
 ## To install the project
-- npm istall
+- npm install
 ## To run the project
 - npm run dev 
 
