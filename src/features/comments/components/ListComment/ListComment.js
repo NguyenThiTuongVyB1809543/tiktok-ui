@@ -22,8 +22,7 @@ function ListComment({ video }) {
   useEffect(() => {
     const fetchApi = async () => {
       const result = await commentService.getListComment(video._id);
-      setListComment(result);
-
+      setListComment(result); 
       setLoading(false);
     };
 
@@ -103,6 +102,19 @@ function ListComment({ video }) {
     setLoading(false);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+
   const onFormSubmit = (e) => {
     e.preventDefault();
     handleComment();
@@ -134,9 +146,11 @@ function ListComment({ video }) {
                           {getFullName(comment.user)}
                         </p>
                       </Link>
-
+                      <div>
+                        {}
+                      </div>
                       <p className={styles.comment_text}>{comment.comment}</p>
-                      <p className={styles.created_at}>{comment.createdAt}</p>
+                      <p className={styles.created_at}>{formatDate(comment.createdAt)}</p>
                     </div>
                     <div className={styles.action_container}>
                       <div className={styles.like_wrapper}>
