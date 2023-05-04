@@ -38,7 +38,7 @@ function VideoDetail({ data }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.video_container}>
-        <img className={styles.blur} src={video.thumb_url} alt="" />
+        {/* <img className={styles.blur} src={video.thumb_url} alt="" /> */}
         <div className={styles.video_wrapper}>
           <div className={styles.video}>
             {/* Chỗ này là chỗ có comment */}

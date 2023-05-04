@@ -13,6 +13,8 @@ const NotFound = lazy(() => import("~/pages/NotFound"));
 const Profile = lazy(() => import("~/pages/Profile"));
 const Notification = lazy(() => import("~/pages/Notification"));
 const Message = lazy(() => import("~/pages/Message"));
+const Cart = lazy(() => import("~/pages/Cart"));
+const Booth = lazy(() => import("~/pages/Booth"));
 const EditProfile = lazy(() => import("~/pages/EditProfile"));
 const Upload = lazy(() => import("~/pages/Upload"));
 const Login = lazy(() => import("~/pages/Login"));
@@ -38,6 +40,8 @@ const privateRoutes = [
   { path: config.routes.profile, component: Profile },
   { path: config.routes.notification, component: Notification },
   { path: config.routes.messages, component: Message },
+  { path: config.routes.cart, component: Cart },
+  { path: config.routes.booth, component: Booth },
   { path: config.routes.editprofile, component: EditProfile },
   { path: config.routes.upload, component: Upload, layout: HeaderOnly },
 ];

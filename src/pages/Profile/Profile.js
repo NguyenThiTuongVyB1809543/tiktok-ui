@@ -93,9 +93,12 @@ function Profile() {
                 <div className={styles.button_container}>
                   {user.is_followed ? (
                     <div className={styles.followed_container}>
-                      <Button outline large>
-                        Messenges
-                      </Button>
+                      <Link to={config.routes.messages}>
+                        <Button outline large>
+                          Booth
+                        </Button>
+                      </Link>
+                      
                       <Tippy content="Unfollow" placement="bottom">
                         <div className={styles.unfollow} onClick={handleFollow}>
                           <BiUserCheck />
@@ -121,9 +124,7 @@ function Profile() {
                       <Link  to={config.routes.editProfileLink(user.nickname)}  >
                           Edit profile
                       </Link>
-                  </Button>  
-                
- 
+                  </Button>   
               </div>
             )}
           </div>

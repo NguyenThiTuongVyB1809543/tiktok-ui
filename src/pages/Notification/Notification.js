@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import styles from "./Profile.module.scss"; 
+import { Link, useParams } from "react-router-dom"; 
 import Image from "../../components/Image"; 
 import Loader from "~/components/Core/Loader";
 import WrapperAuth from "~/components/WrapperAuth"; 
@@ -71,27 +72,80 @@ function Notification() {
     switch (notification.type) {
       case "like":
         return (
+          // <Link
+          // to={`${config.routes.profileLink(notification.fromUser.nickname)}/videos/${notification.video._id}`} 
+          //   className={styles.account_item}
+          // >   
+          //   <div>  
+          //     <p className={styles.comment_text}>
+          //       <Link
+          //         to={config.routes.profileLink(notification.fromUser.nickname)}
+          //         className={styles.account_item}
+          //       >  
+          //           {getFullName(notification.fromUser)}&nbsp;
+          //       </Link> 
+          //       đã thích video của bạn
+          //     </p>
+          //   </div>
+          // </Link> 
+          <div>  
           <p className={styles.comment_text}>
-            {getFullName(notification.fromUser)} đã thích video của bạn
+            <Link
+              to={config.routes.profileLink(notification.fromUser.nickname)}
+              className={styles.account_item}
+            >  
+                {getFullName(notification.fromUser)}&nbsp;
+            </Link> 
+            đã thích video của bạn
           </p>
+        </div>
         );
       case "comment":
         return (
-          <p className={styles.comment_text}>
-            {getFullName(notification.fromUser)} đã commnent video của bạn
-          </p>
+          
+          <div>  
+            <p className={styles.comment_text}>
+              <Link
+                to={config.routes.profileLink(notification.fromUser.nickname)}
+                className={styles.account_item}
+              >  
+                  {getFullName(notification.fromUser)}&nbsp;
+              </Link> 
+              đã commnent video của bạn
+             </p>
+          </div>
+           
         );
       case "follow":
         return (
-          <p className={styles.comment_text}>
-            {getFullName(notification.fromUser)} đã follow bạn
-          </p>
+          
+          <div>  
+            <p className={styles.comment_text}>
+              <Link
+                to={config.routes.profileLink(notification.fromUser.nickname)}
+                className={styles.account_item}
+              >  
+                  {getFullName(notification.fromUser)}&nbsp;
+              </Link> 
+              đã follow bạn
+             </p>
+          </div>
+           
         );
       case "like_comment":
         return (
-          <p className={styles.comment_text}>
-            {getFullName(notification.fromUser)} đã thích comment của bạn
-          </p>
+          <div>  
+            <p className={styles.comment_text}>
+              <Link
+                to={config.routes.profileLink(notification.fromUser.nickname)}
+                className={styles.account_item}
+              >  
+                  {getFullName(notification.fromUser)}&nbsp;
+              </Link> 
+              đã thích comment của bạn
+             </p>
+          </div>
+           
         );
       default:
         return null;
@@ -109,18 +163,13 @@ function Notification() {
                   <div className={styles.comment_content_container}>
                     <Image src={notification.fromUser.avatar} />
                     <div className={styles.comment_container}>
-                      {renderNotification(notification)} 
-                      {/* <Link
-                        to={config.routes.profileLink(notification.user.nickname)}
+                      <Link
+                        to={config.routes.profileLink(notification.fromUser.nickname)}
                         className={styles.account_item}
-                      >
-                        <p className={styles.comment_user}>
-                          {getFullName(notification.user)}
-                        </p>
-                      </Link> */}
-                      
-                      <p className={styles.created_at}>{formatDate(notification.createdAt)}</p>
-                     
+                      >    
+                      </Link>
+                        {renderNotification(notification)} 
+                        <p className={styles.created_at}>{formatDate(notification.createdAt)}</p> 
                     </div>
                     <div className={styles.action_container}>
                       <div className={styles.like_wrapper}>

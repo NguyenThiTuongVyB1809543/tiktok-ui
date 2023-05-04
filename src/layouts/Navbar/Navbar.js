@@ -5,6 +5,8 @@ import {
   FaRegCommentAlt,
   FaPlus,
   FaRegMoon,
+  FaShoppingCart, 
+  FaPersonBooth
 } from "react-icons/fa";
 import { BsSun } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
@@ -106,10 +108,17 @@ function Navbar() {
 
           {user ? (
             <>
-              <Tippy content="Messages" placement="bottom" theme="gradient">
+              <Tippy content="Booth" placement="bottom" theme="gradient">
                 <div className={styles.menu_action}> 
-                  <Link to={config.routes.messages}>
-                    <FaRegPaperPlane /> 
+                  <Link to={config.routes.booth}>
+                    <FaPersonBooth /> 
+                  </Link>
+                </div>
+              </Tippy>
+              <Tippy content="Cart" placement="bottom" theme="gradient">
+                <div className={styles.menu_action}> 
+                  <Link to={config.routes.cart}>
+                    <FaShoppingCart /> 
                   </Link>
                 </div>
               </Tippy>

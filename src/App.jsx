@@ -10,10 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useSelector } from "react-redux";
 import Loader from "./components/Core/Loader";
 
-function App() {
-   
-
-
+function App() { 
   const location = useLocation();
   const videoDetail = location.state && location.state.videoDetail;
   const { user } = useSelector((state) => state.user); 
