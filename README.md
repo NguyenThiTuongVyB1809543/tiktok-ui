@@ -1,4 +1,4 @@
-# Tiktok (Developing)
+# Toktok (Developing)
 
 Make Your Day
  
@@ -6,6 +6,10 @@ Make Your Day
 
 - Test Redux Toolkit
 - Vite
+## To install the project
+- npm istall
+## To run the project
+- npm run dev 
 
 ## Features
 
