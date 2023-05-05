@@ -1,4 +1,4 @@
-# Tiktok (Developing)
+# Toktok (Developing)
 
 Make Your Day
  
@@ -6,6 +6,10 @@ Make Your Day
 
 - Test Redux Toolkit
 - Vite
+## To install the project
+- npm install
+## To run the project
+- npm run dev 
 
 ## Features
 
@@ -21,5 +25,9 @@ Make Your Day
 - Interact and watch videos like Tiktok
 - Detail Video Page Modal
 - Dark theme
-- ...
+- Like a comment
+- Delete a comment
+- Delete a video
+- Edit profile
+- 
  
