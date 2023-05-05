@@ -16,6 +16,7 @@ const Message = lazy(() => import("~/pages/Message"));
 const Cart = lazy(() => import("~/pages/Cart"));
 const Booth = lazy(() => import("~/pages/Booth"));
 const EditProfile = lazy(() => import("~/pages/EditProfile"));
+const AddProduct = lazy(() => import("~/pages/AddProduct"));
 const Upload = lazy(() => import("~/pages/Upload"));
 const Login = lazy(() => import("~/pages/Login"));
 const Register = lazy(() => import("~/pages/Register"));
@@ -43,6 +44,7 @@ const privateRoutes = [
   { path: config.routes.cart, component: Cart },
   { path: config.routes.booth, component: Booth },
   { path: config.routes.editprofile, component: EditProfile },
+  { path: config.routes.addProduct, component: AddProduct },
   { path: config.routes.upload, component: Upload, layout: HeaderOnly },
 ];
 

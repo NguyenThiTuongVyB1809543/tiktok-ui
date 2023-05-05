@@ -93,7 +93,7 @@ function Profile() {
                 <div className={styles.button_container}>
                   {user.is_followed ? (
                     <div className={styles.followed_container}>
-                      <Link to={config.routes.messages}>
+                      <Link to={config.routes.boothLink(user.nickname)}>
                         <Button outline large>
                           Booth
                         </Button>
@@ -120,7 +120,7 @@ function Profile() {
             (
               
               <div className={styles.button_container}  >
-                  <Button text leftIcon={<FaRegEdit />} >
+                  <Button outline large  leftIcon={<FaRegEdit />} >
                       <Link  to={config.routes.editProfileLink(user.nickname)}  >
                           Edit profile
                       </Link>

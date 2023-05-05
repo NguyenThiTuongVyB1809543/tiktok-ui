@@ -8,6 +8,7 @@ import {
   FaShoppingCart, 
   FaPersonBooth
 } from "react-icons/fa";
+import { BsShop, BsCart } from "react-icons/bs";
 import { BsSun } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
 import Logo from "~/assets/images/logo.svg";
@@ -110,15 +111,16 @@ function Navbar() {
             <>
               <Tippy content="Booth" placement="bottom" theme="gradient">
                 <div className={styles.menu_action}> 
-                  <Link to={config.routes.booth}>
-                    <FaPersonBooth /> 
+                  {/* <Link to={config.routes.booth}> */}
+                  <Link to={config.routes.boothLink(user.nickname) }>
+                    <BsShop /> 
                   </Link>
                 </div>
               </Tippy>
               <Tippy content="Cart" placement="bottom" theme="gradient">
                 <div className={styles.menu_action}> 
                   <Link to={config.routes.cart}>
-                    <FaShoppingCart /> 
+                    <BsCart /> 
                   </Link>
                 </div>
               </Tippy>
