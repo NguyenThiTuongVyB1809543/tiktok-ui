@@ -222,10 +222,18 @@
             height: 28px;
             overflow: hidden;
           }
+          .product_cartbtn {
+            font-weight: 800;
+            padding: 2px 4px 0px;
+            height: 28px;
+            overflow: hidden;
+          }
+          
+          
           .product_desc {
             font-weight: 400;
             padding: 2px 4px 0px;
-            height: 28px;
+            height: 80px;
             overflow: hidden;
           }
           .product_price {
@@ -235,6 +243,16 @@
             overflow: hidden;
           }
         }
+      }
+    }
+    .product_button_container{
+      display: flex;
+      justify-content: center;
+      .product_button {
+        font-weight: 800;
+        padding: 2px 4px 0px;
+        height: 28px;
+        // overflow: hidden;
       }
     }
   }

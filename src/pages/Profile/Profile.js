@@ -49,18 +49,14 @@ function Profile() {
     const isFollowed = await handleFollowFunc(user); 
     setUser(prevUser => ({ ...prevUser, is_followed: isFollowed })); 
   };
-  useEffect(() => {
-    // console.log('user is_followed: ', user.is_followed);
+  useEffect(() => { 
   }, [user]);
 
   if (loading) {
     return <Loader />;
   }
   const srcAvatar = "src/assets/images/";
-  const srcVideo = "src/assets/video/";
-  // console.log('user profile: ',user);
-  // console.log(user.videos);
-
+  const srcVideo = "src/assets/video/"; 
   
 
   return (
@@ -69,9 +65,7 @@ function Profile() {
         
         <div className={styles.info}>
           <Image
-            src={user.avatar}
-            // src={srcAvatar + user.avatar}
-            // src= {srcAvatar + "Avatar2.jpg"} //hình đại diện
+            src={user.avatar} 
             width={116}
             height={116}
             className={styles.avatar}
@@ -83,8 +77,7 @@ function Profile() {
             </h2>
 
             <h4 className={styles.user_fullname}>
-              {getFullName(user)} 
-              {/* // lấy họ cộng với tên  */}
+              {getFullName(user)}  
  
             </h4> 
 
@@ -131,28 +124,23 @@ function Profile() {
         </div>
         <h2 className={styles.count_info}>
           <div className={styles.number_container}>
-            <strong>{user.followings_count}</strong>
-            {/* <strong>followings_count</strong> */}
+            <strong>{user.followings_count}</strong> 
             <span>Followings</span>
           </div>
           <div className={styles.number_container}>
-            <strong>{user.followers_count}</strong>
-            {/* <strong>followers_count</strong> */}
+            <strong>{user.followers_count}</strong> 
             <span>Follower</span>
           </div>
-          <div className={styles.number_container}>
-            <strong>{user.likes_count}</strong>
-            {/* <strong>likes_count</strong> */}
+          {/* <div className={styles.number_container}>
+            <strong>{user.likes_count}</strong> 
             <span>Likes</span>
-          </div>
+          </div> */}
         </h2>
-        <h2 className={styles.bio}>{user.bio || "No bio yet."}</h2>
-        {/* <h2 className={styles.bio}>bio</h2> */}
+        <h2 className={styles.bio}>{user.bio || "No bio yet."}</h2> 
       </div>
       <div className={styles.list_video_wrapper}>
         <div className={styles.title_wrapper}>
           <p className={styles.title}>Videos</p>
-          {/* <p className={styles.title}>Liked</p> */}
           <p className={styles.title}></p>
         </div>
         <div className={styles.list_video_container}>
@@ -170,8 +158,7 @@ function Profile() {
               >
                 <div className={styles.video_container}>
                   <video
-                    src={video.file_url}
-                    // src={srcVideo + videotemp}
+                    src={video.file_url} 
                     muted
                     loop
                     onMouseEnter={handleVideoPlay}

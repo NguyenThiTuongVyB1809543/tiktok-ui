@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "~/components/Core/Button";
 import Loader from "~/components/Core/Loader";
 import { UploadIcon } from "~/components/Icons";
-import { videosService } from "~/features/videos/services/videosService";
+import { productService } from "~/features/products/services/productService";
 import styles from "./Upload.module.scss";
 import Image from "./../../components/Image";
 
@@ -15,7 +15,8 @@ function Addproduct() {
   const { register, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [namefile, setNameFile] = useState("");
-  const [music, setMusic] = useState(""); 
+  const [price, setPrice] = useState(""); 
+  const [productName, setProductName] = useState(""); 
 
 
   const user1 = localStorage.getItem("user"); 
@@ -31,44 +32,24 @@ function Addproduct() {
     setFile(e.target.files[0]);
   };
 
-  const handleUploadVideo = async (data) => {
+  const handleAddProduct = async (data) => {
     setIsLoading(true);
-    await videosService.postVideo(data);
+    await productService.postProduct(data);
     // console.log(data);
     setIsLoading(false);
     navigate("/");
   };
-
-  // const submitForm = (data) => {
-  //   const fullData = { ...data, upload_file: file }; 
-  //   const formData = new FormData(); 
-  //   for (const key in fullData) {
-  //     if (key === "allows") {
-  //       if (fullData[key])
-  //         fullData.allows.forEach(function (value) {
-  //           formData.append("allows[]", value);
-  //         });
-  //     } else {
-  //       formData.append(key, fullData[key]);
-  //     }
-  //   } 
-  //   // for (const value of formData.values()) {
-  //   //   console.log('value form data: ',value);
-  //   // }
-  //   for(var pair of formData.entries()) {
-  //     console.log(pair[0]+ ', '+ pair[1]); 
-  //   }
-  //   handleUploadVideo(formData);
-  // };
-
-
+ 
   const submitForm = (data) => {
     const fullData = { ...data, namefile, userId: user.data._id  };   
-    handleUploadVideo(fullData);
+    console.log('fullData:  ', fullData);
+
+    handleAddProduct(fullData);
   };
   // console.log('namefile:  ', namefile);
   // console.log('description:  ', description);
-  // console.log('music:  ', music);
+  // console.log('productName:  ', productName);
+  // console.log('price:  ', price);
   const srcAvatar = "src/assets/images/";
 
   return (
@@ -124,13 +105,13 @@ function Addproduct() {
                 <div className={styles.form_footer}>
                   <input
                     className={styles.form_input}
-                    name="product_name"
-                    id="product_name"
+                    name="productName"
+                    id="productName"
                     type="text"
                     placeholder="Product name"
-                    {...register("music")}
-                    value={music}
-                    onChange={(e) => setMusic(e.target.value)}
+                    {...register("productName")}
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
                   />
                 </div>
               </div>
@@ -164,88 +145,13 @@ function Addproduct() {
                     id="price"
                     type="text"
                     placeholder="Price"
-                    {...register("music")}
-                    value={music}
-                    onChange={(e) => setMusic(e.target.value)}
+                    {...register("price")}
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
               </div>
-              <div className={styles.form_item}>
-                <div className={styles.form_header}>
-                  {/* <span className={styles.form_label}>Cover</span> */}
-                </div>
-                <div className={styles.form_footer}>
-                  {/* <input
-                    className={styles.form_input}
-                    name="thumbnail_time"
-                    id="thumbnail_time"
-                    {...register("thumbnail_time")}
-                    type="number"
-                    placeholder="Thumbnail capture position, units of seconds (Ex: 2)"
-                    defaultValue={1}
-                  /> */}
-                </div>
-              </div>
-            
-            <div className={styles.form_item}>
-              <div className={styles.form_header}>
-                {/* <span className={styles.form_label}>
-                  Who can watch this video
-                </span> */}
-              </div>
-              <div className={styles.form_footer}>
-                {/* <select
-                  className={styles.form_select}
-                  name="viewable"
-                  id="viewable"
-                  {...register("viewable")}
-                >
-                  <option value="public">Public</option>
-                  <option value="friends">Friends</option>
-                  <option value="private">Private</option>
-                </select> */}
-              </div>
-            </div>
-            <div className={styles.form_item}>
-              <div className={styles.form_header}>
-                {/* <span className={styles.form_label}>Allow users to:</span> */}
-              </div>
-              <div className={styles.form_footer}>
-                <div className={styles.form_checkbox}>
-                  {/* <input
-                    value="comment"
-                    type="checkbox"
-                    name="allows"
-                    id="allows"
-                    defaultChecked
-                    {...register("allows")}
-                  />
-                  <label htmlFor="">Comment</label> */}
-                </div>
-                <div className={styles.form_checkbox}>
-                  {/* <input
-                    value="duet"
-                    type="checkbox"
-                    name="allows"
-                    id="allows"
-                    defaultChecked
-                    {...register("allows")}
-                  />
-                  <label htmlFor="">Duet</label> */}
-                </div>
-                <div className={styles.form_checkbox}>
-                  {/* <input
-                    value="stitch"
-                    type="checkbox"
-                    name="allows"
-                    id="allows"
-                    defaultChecked
-                    {...register("allows")}
-                  />
-                  <label htmlFor="">Stitch</label> */}
-                </div>
-              </div>
-            </div>
+                
             <div className={styles.button_container}>
               <Button text className={styles.discard}>
                 Discard
