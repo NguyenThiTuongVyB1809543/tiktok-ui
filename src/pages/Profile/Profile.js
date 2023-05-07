@@ -99,13 +99,22 @@ function Profile() {
                       </Tippy>
                     </div>
                   ) : (
-                    <Button
-                      large
-                      className={styles.button_follow}
-                      onClick={handleFollow}
-                    >
-                      Follow
-                    </Button>
+                    <div className={styles.followed_container}>
+
+                      <Button
+                        large
+                        className={styles.button_follow}
+                        onClick={handleFollow}
+                      >
+                        Follow
+                      </Button>
+
+                      <Link to={config.routes.boothLink(user.nickname)}>
+                        <Button outline large className={styles.button_space}>
+                          Booth
+                        </Button>
+                      </Link>
+                    </div>
                   )}
                 </div>
               </WrapperAuth>

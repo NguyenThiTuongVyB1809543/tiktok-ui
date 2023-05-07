@@ -12,7 +12,8 @@ import { getUsersProductService } from "~/features/products/services/getUsersPro
 import { getFullName } from "~/utils/common";
 import { useSelector } from "react-redux";
 import {  FaRegPlusSquare } from "react-icons/fa";
-import { BsCartPlus } from "react-icons/bs";
+import { BsCartPlus, BsTrash } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
 
 import { config } from "~/config";  
 
@@ -89,13 +90,20 @@ function Booth() {
                       </Link> 
                     </div>
                   ) : (
-                    <Button
-                      large
-                      className={styles.button_follow}
-                      onClick={handleFollow}
-                    >
-                      Follow
-                    </Button>
+                    <div className={styles.followed_container}>
+                      <Button
+                        outline
+                        className={styles.button_follow}
+                        onClick={handleFollow}
+                      >
+                        Follow
+                      </Button>
+                      <Link to={config.routes.profileLink(user.nickname)}>
+                        <Button outline large className={styles.button_space}>
+                          Profile
+                        </Button>
+                      </Link> 
+                    </div>
                   )}
                 </div>
               </WrapperAuth>
@@ -146,19 +154,21 @@ function Booth() {
                     <div className={styles.product_price}>
                       <p>Giá: {product.price}</p>
                     </div>
-                    {userRedux?._id !== user?._id ? (
+                    {userRedux?._id === user?._id ? (
                       <div className={styles.product_button_container}>
                         <div className={styles.product_button}>
-                          <Button outline large> 
-                            <Tippy content="Edit" placement="bottom"> 
-                                <BsCartPlus /> 
-                            </Tippy> 
-                          </Button> 
+                          <Link  to={config.routes.editProductLink(product)}  >
+                            <Button outline large> 
+                              <Tippy content="Edit" placement="bottom"> 
+                                  <FiEdit /> 
+                              </Tippy> 
+                            </Button>  
+                          </Link>
                         </div>
                         <div className={styles.product_button }>
                           <Button outline large> 
                             <Tippy content="Delete" placement="bottom"> 
-                                <BsCartPlus /> 
+                                <BsTrash /> 
                             </Tippy> 
                           </Button> 
                         </div>
