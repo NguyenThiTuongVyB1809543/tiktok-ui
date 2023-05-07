@@ -14,12 +14,12 @@ export const getListProduct = async () => {
     console.log(err);
   }
 };
- 
- 
-
-export const getProduct = async (_id) => {
+  
+export const getProduct = async (id) => {
   try {
-    const res = await request.get(`products/${_id}`);
+     
+    const res = await request.get(`products/${id}`);
+
     return res ;
   } catch (err) {
     console.log(err);
@@ -30,6 +30,17 @@ export const postProduct = async (formData) => {
   try {
     console.log('formData của postProduct: ',formData);
     await request.post("products", formData  ); 
+    // const res = await request.post("products", formData  );  
+    // return res ;
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const editProduct = async (formData) => {
+  try {
+    console.log('formData của editProduct: ',formData);
+    await request.post("products/edit", formData  ); 
     // const res = await request.post("products", formData  );  
     // return res ;
 

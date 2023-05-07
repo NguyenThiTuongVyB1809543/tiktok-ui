@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams  } from "react-router-dom";
 import Button from "~/components/Core/Button";
 import Loader from "~/components/Core/Loader";
 import { UploadIcon } from "~/components/Icons";
-import { productService } from "~/features/products/services/productService";
+import { productService } from "~/features/products/services/productService"; 
 import styles from "./Upload.module.scss";
-import Image from "./../../components/Image";
-import { Formik, Form, Field, ErrorMessage  } from 'formik';
+import Image from "./../../components/Image"; 
 
 
-function EditProduct(product) {
+function EditProduct() {
   const [filePreview, setFilePreview] = useState("");
   const [file, setFile] = useState("");
   const [description, setDescription] = useState("");
@@ -18,56 +17,68 @@ function EditProduct(product) {
   const [isLoading, setIsLoading] = useState(false);
   const [namefile, setNameFile] = useState("");
   const [price, setPrice] = useState(""); 
-  const [productName, setProductName] = useState(""); 
-  const params = useParams();
-   
-
+  const navigate = useNavigate(); 
+  const [productName, setProductName] = useState("");  
   const user1 = localStorage.getItem("user"); 
   const user = JSON.parse(user1); 
- 
-  const navigate = useNavigate(); 
-
-  const initialValues = {
-    namefile:  params.namefile, 
-    description: params.description,
-    productName: params.productName, 
-    price: params.price  , 
-  };
-  console.log( JSON.stringify(params));
-
-
+  const [selectedFile, setSelectedFile] = useState(null);
+  const  params  = useParams();
+  const  productId  = params.id;
+  const [product, setProduct] = useState();
+  const [initialValues, setInitialValues] = useState({
+    productName: '',
+    description: '',
+    price: '',
+    namefile: ''
+  });
+  useEffect(() => {
+    const fetchApi = async () => {
+      const result = await productService.getProduct(productId);
+      setProduct(result); 
+      setInitialValues({
+        productName: result.product_name,
+        description: result.description,
+        price: result.price,
+        namefile: result.product_img_url
+      });
+    };
+    
+    fetchApi();
+  }, []); 
+   
 
   const handleFile = (e) => {
     const src = URL.createObjectURL(e.target.files[0]);
     const namefile = e.target.files[0].name;
     setNameFile(namefile);
-    // console.log('e.target.files[0].name:   ', e.target.files[0].name);
+    // console.log('e.target.files[0] :   ', e.target.files[0] );
     setFilePreview(src);
     setFile(e.target.files[0]);
   };
-
-  const handleAddProduct = async (data) => {
-    setIsLoading(true);
-    await productService.postProduct(data);
+  // console.log('đây là initialValues.price: ', initialValues.price);
+  const handleEditProduct = async (data) => {
+    // setIsLoading(true);
+    await productService.editProduct(data);
     // console.log(data);
-    setIsLoading(false);
-    navigate("/");
+    // setIsLoading(false);
+    
   };
  
-  const submitForm = (data) => {
-    const fullData = { ...data, namefile, userId: user.data._id  };   
-    console.log('fullData:  ', fullData);
+  const submitForm = (data) => { 
+    const fullData = { ...data, namefile, userId: user.data._id, productId: productId  };   
+    // console.log('fullData:  ', fullData);
 
-    handleAddProduct(fullData);
+    handleEditProduct(fullData);
+    navigate(`/@${user.data.nickname}/booth`);
   };
   // console.log('namefile:  ', namefile);
   // console.log('description:  ', description);
   // console.log('productName:  ', productName);
   // console.log('price:  ', price);
-  const srcAvatar = "src/assets/images/";
-
+  // const srcProduct = "src/assets/images/";
+   
   return (
-    <form initialValues={initialValues} onSubmit={handleSubmit(submitForm)} className={styles.upload_wrapper}>
+    <form  initialValues={initialValues}  onSubmit={handleSubmit(submitForm)} className={styles.upload_wrapper}>
       <div className={styles.upload_container}>
         <span className={styles.upload_title}>Edit product</span>
         <div className={styles.upload_sub_title}>
@@ -83,21 +94,19 @@ function EditProduct(product) {
               <div className={styles.upload_state}>
                 {file ? (
                   <div className={styles.preview_v2}>
-                    <Image
-                      src={filePreview}  
+                    <Image  
+                      src = { filePreview } 
                       className={styles.video_preview}
                     />
                     <div className={styles.phone_preview}></div>
                   </div>
-                ) : (
+                ) : ( 
                   <>
-                    <UploadIcon />
-                    <span className={styles.upload_state_title}>
-                      Select image product to upload
-                    </span> 
-                    <Button primary noAction className={styles.select_file}>
-                      Select File
-                    </Button>
+                    <Image
+                      // src={filePreview}  
+                      src =  { initialValues.namefile } 
+                      className={styles.image_preview}
+                    />  
                   </>
                 )}
               </div>
@@ -106,9 +115,10 @@ function EditProduct(product) {
               onChange={handleFile}
               name="upload_file"
               id="upload_file"
-              required
+              // required
               type="file"
               accept="image/*"
+              defaultValue={initialValues.namefile}
             />
           </div>
           <div className={styles.upload_content_right}>
@@ -124,7 +134,8 @@ function EditProduct(product) {
                     type="text"
                     placeholder="Product name"
                     {...register("productName")}
-                    value={productName}
+                    // value={productName}
+                    defaultValue={initialValues.productName} 
                     onChange={(e) => setProductName(e.target.value)}
                   />
                 </div>
@@ -142,7 +153,8 @@ function EditProduct(product) {
                     name="description"
                     id="description"
                     {...register("description")}
-                    value={description}
+                    // value={description}
+                    defaultValue={initialValues.description} 
                     onChange={(e) => setDescription(e.target.value)}
                     className={styles.form_textarea}
                   />
@@ -160,24 +172,25 @@ function EditProduct(product) {
                     type="text"
                     placeholder="Price"
                     {...register("price")}
-                    value={price}
+                    // value={price}
+                    defaultValue={initialValues.price.toString()} 
                     onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
-              </div>
-                
+              </div> 
             <div className={styles.button_container}>
               <Button text className={styles.discard}>
                 Discard
               </Button>
               <Button
                 primary
-                disabled={!file || isLoading}
+                // disabled={!file || isLoading}
                 className={styles.post}
                 type="submit"
-                leftIcon={isLoading ? <Loader /> : null}
+                // leftIcon={isLoading ? <Loader /> : null}
               >
-                {!isLoading && "Post"}
+                {/* {!isLoading && "Post"} */}
+                {"Post"}
               </Button>
             </div>
           </div>

@@ -107,7 +107,10 @@
           }
         }
       }
-
+      .image_preview{
+        width: 139%;
+        height: 100%;
+      }
       .preview {
         margin-left: -20px;
         margin-right: 8px;
@@ -132,6 +135,7 @@
             margin-top: 12px;
             border-radius: 0.5px;
           }
+           
 
           .phone_preview {
             // background-image: url(../../assets/images/Phone.png);

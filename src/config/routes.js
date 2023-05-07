@@ -1,16 +1,21 @@
 export const routes = {
   home: "/",
   following: "/following",
+
   profile: "/@:nickname",
-  booth: "/@:nickname/booth",
-  editprofile: "/@:nickname/edit",
-  editproduct: "/@:id/edit_product",
-  addProduct: "/@:nickname/add_product",
   profileLink: (nickname) => `/@${nickname}`,
-  boothLink: (nickname) => `/@${nickname}/booth`,
+  editprofile: "/@:nickname/edit",
   editProfileLink: (nickname) => `/@${nickname}/edit`,
-  editProductLink: (product) => `/@${product._id}/edit_product`,
+
+  booth: "/@:nickname/booth",
+  boothLink: (nickname) => `/@${nickname}/booth`, 
+
+  addProduct: "/@:nickname/add_product",
   addProductLink: (nickname) => `/@${nickname}/add_product`,
+  
+  editproduct: "/@:id/edit_product",
+  editProductLink: (product) => `/@${product._id}/edit_product`,
+  
   live: "/live",
   upload: "/upload",
   search: "/search",

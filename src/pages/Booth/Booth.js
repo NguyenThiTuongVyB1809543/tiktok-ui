@@ -9,6 +9,7 @@ import Loader from "~/components/Core/Loader";
 import WrapperAuth from "~/components/WrapperAuth";
 import handleFollowFunc from "~/utils/handleFollow";
 import { getUsersProductService } from "~/features/products/services/getUsersProductService";
+import { productService } from "~/features/products/services/productService";
 import { getFullName } from "~/utils/common";
 import { useSelector } from "react-redux";
 import {  FaRegPlusSquare } from "react-icons/fa";
@@ -26,6 +27,7 @@ function Booth() {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const nickname = params.nickname;
+  const [product, setProduct] = useState({}); 
 
   const user1 = localStorage.getItem("user"); 
   const user2 = JSON.parse(user1); 
@@ -39,8 +41,7 @@ function Booth() {
 
     fetchApi();
   }, [nickname, userRedux, user.is_followed]);
-
-    
+ 
   const handleFollow = async () => {
     const isFollowed = await handleFollowFunc(user); 
     setUser(prevUser => ({ ...prevUser, is_followed: isFollowed })); 
@@ -49,11 +50,22 @@ function Booth() {
     // console.log('user is_followed: ', user.is_followed);
   }, [user]);
 
+
+  //delete comment
+  const deleteProduct = async (product) => { 
+    setLoading(true);
+    await productService.deleteProduct(product._id); 
+    // setListComment((prev) => prev.filter((c) => {return c._id !== product._id }));
+    setLoading(false);
+    // console.log('_id comment cần xóa: ', comment);
+
+  };
+
   if (loading) {
     return <Loader />;
   }
   const srcAvatar = "src/assets/images/"; 
- 
+  
 
   
 
@@ -157,8 +169,8 @@ function Booth() {
                     {userRedux?._id === user?._id ? (
                       <div className={styles.product_button_container}>
                         <div className={styles.product_button}>
-                          <Link  to={config.routes.editProductLink(product)}  >
-                            <Button outline large> 
+                          <Link  to={config.routes.editProductLink(product)}>
+                            <Button outline large  > 
                               <Tippy content="Edit" placement="bottom"> 
                                   <FiEdit /> 
                               </Tippy> 
@@ -166,7 +178,7 @@ function Booth() {
                           </Link>
                         </div>
                         <div className={styles.product_button }>
-                          <Button outline large> 
+                          <Button outline large onClick={() => deleteProduct(product)}> 
                             <Tippy content="Delete" placement="bottom"> 
                                 <BsTrash /> 
                             </Tippy> 

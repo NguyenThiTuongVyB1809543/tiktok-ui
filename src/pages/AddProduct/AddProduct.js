@@ -37,7 +37,8 @@ function Addproduct() {
     await productService.postProduct(data);
     // console.log(data);
     setIsLoading(false);
-    navigate("/");
+    navigate(`/@${user.data.nickname}/booth`);
+
   };
  
   const submitForm = (data) => {
