@@ -68,6 +68,8 @@ function Notification() {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
+
+
   const renderNotification = (notification) => {
     switch (notification.type) {
       case "like":
@@ -88,31 +90,43 @@ function Notification() {
           //     </p>
           //   </div>
           // </Link> 
-          <div>  
-          <p className={styles.comment_text}>
-            <Link
-              to={config.routes.profileLink(notification.fromUser.nickname)}
-              className={styles.account_item}
-            >  
-                {getFullName(notification.fromUser)}&nbsp;
+          
+          <div> 
+            <Link  to={config.routes.videoLink(notification.video)}  >
+              <p className={styles.comment_text}>
+              {/* {config.routes.videoLink(notification.video)} */}
+              {/* {config.routes.profileLink(notification.fromUser.nickname)} */}
+                <Link
+                  to={config.routes.profileLink(notification.fromUser.nickname)}
+                  className={styles.account_item}
+                >  
+                    {getFullName(notification.fromUser)}&nbsp;
+                </Link> 
+                đã thích video của bạn
+              </p>
             </Link> 
-            đã thích video của bạn
-          </p>
-        </div>
+          </div>
         );
       case "comment":
         return (
           
           <div>  
-            <p className={styles.comment_text}>
-              <Link
-                to={config.routes.profileLink(notification.fromUser.nickname)}
-                className={styles.account_item}
-              >  
-                  {getFullName(notification.fromUser)}&nbsp;
-              </Link> 
-              đã commnent video của bạn
-             </p>
+            
+            
+
+            <Link  to={config.routes.videoLink(notification.video)}  >
+              <p className={styles.comment_text}>
+                  <Link
+                  to={config.routes.profileLink(notification.fromUser.nickname)}
+                  className={styles.account_item}
+                >  
+                    {getFullName(notification.fromUser)}&nbsp;
+                </Link> 
+                đã commnent video của bạn 
+              </p>
+              
+            </Link>
+              
           </div>
            
         );

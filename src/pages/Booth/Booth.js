@@ -10,6 +10,7 @@ import WrapperAuth from "~/components/WrapperAuth";
 import handleFollowFunc from "~/utils/handleFollow";
 import { getUsersProductService } from "~/features/products/services/getUsersProductService";
 import { productService } from "~/features/products/services/productService";
+import { cartService } from "~/features/carts/services/cartService";
 import { getFullName } from "~/utils/common";
 import { useSelector } from "react-redux";
 import {  FaRegPlusSquare } from "react-icons/fa";
@@ -28,7 +29,7 @@ function Booth() {
   const params = useParams();
   const nickname = params.nickname;
   const [product, setProduct] = useState({}); 
-
+  const [productList, setProductList] = useState([]);
   const user1 = localStorage.getItem("user"); 
   const user2 = JSON.parse(user1); 
 
@@ -56,9 +57,18 @@ function Booth() {
     setLoading(true);
     await productService.deleteProduct(product._id); 
     // setListComment((prev) => prev.filter((c) => {return c._id !== product._id }));
-    setLoading(false);
-    // console.log('_id comment cần xóa: ', comment);
-
+    
+      const fetchApi = async () => {
+        const result = await getUsersProductService.userProduct(nickname);
+        setUser(result); 
+      }; 
+      fetchApi(); 
+    setLoading(false); 
+  };
+  const addToCart = async (product) => { 
+     
+    await cartService.addToCart(product);  
+    setLoading(false); 
   };
 
   if (loading) {
@@ -186,7 +196,7 @@ function Booth() {
                         </div>
                       </div>  
                     ):(
-                      <Button outline large> 
+                      <Button outline large onClick={() => addToCart(product)}> 
                         <Tippy content="Add to cart" placement="bottom">
                           <div className={styles.product_cartbtn}>
                             <BsCartPlus />
