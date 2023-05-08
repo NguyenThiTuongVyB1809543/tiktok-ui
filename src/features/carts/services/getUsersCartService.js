@@ -17,7 +17,8 @@ import { request } from "~/utils/axiosInstance";
 export const getUserCart = async () => {
   try {
     const res = await request.get(`carts`);
-    // return res.data;
+      console.log('res: ',res);
+      // return res.data;
     return res;
   } catch (err) {
     console.log(err);
