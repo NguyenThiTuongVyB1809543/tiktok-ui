@@ -54,7 +54,8 @@ function Video({ data }) {
       muted
       ref={videoRef}
       disablePictureInPicture
-      controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"
+      controlsList="nofullscreen nodownload noremoteplayback "
+      // noplaybackrate
       onMouseEnter={handleShowControls}
       poster={data.thumb_url || ""}
       onClick={handlePauseVideo}

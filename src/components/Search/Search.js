@@ -114,7 +114,7 @@ function Search() {
             value={searchValue}
             className={styles.navbar_search_input}
             type="text"
-            placeholder="Search accounts and videos"
+            placeholder="Search accounts"
             onChange={handleSearchValue}
             ref={searchInput}
             onFocus={handleShowResult}

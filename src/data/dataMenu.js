@@ -30,7 +30,7 @@ export const MENU_ITEMS_1 = [
 
 export const MENU_ITEMS_2 = [
   { title: "View profile", icon: <FaRegUser />, type: "toProfile" },
-  { title: "Get coins", icon: <FaBitcoin /> },
+  { title: "Purchase history", icon: <FaBitcoin /> , type: "purchaseHistory" },
   { title: "Settings", icon: <FaRegSun /> },
   ...MENU_ITEMS_1,
   { title: "Log out", icon: <FaSignOutAlt />, type: "logout", separate: true },

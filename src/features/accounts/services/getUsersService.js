@@ -41,5 +41,15 @@ export const user = async (nickname) => {
     console.log(err);
   }
 };
+export const currentUser = async (id) => {
+  try {
+    const res = await request.get(`users/${id}`);
+    // console.log('res: ', res);
+    // return res.data;
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export * as getUsersService from "~/features/accounts/services/getUsersService";

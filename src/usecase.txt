@@ -1,0 +1,53 @@
+                Hệ thống mạng xã hội video ngắn
+                        Sơ đồ use case người dùng
+
+                                    Người dùng
+                                        |
+           -------------------------------------------------------------------------------------
+           |                                    |                                           |
+    Đăng ký tài khoản                   Đăng nhập tài khoản                       Tìm kiếm tài khoản khác
+           |                                    |                                           |
+           |                                    |                                           |
+    --------------                    ------------------------------------               |
+    |            |                    |                                  |               |
+ Chỉnh sửa       |                Xem video                    Theo dõi/Bỏ theo dõi      |
+trang cá nhân    |                    |                                  |               |
+                |                -----------------------           Thích/Bỏ thích       |
+                |                |                     |             video/bình luận     |
+                |                | Chức năng chỉ hiển  |                                  |
+                |                | thị video của người |                                  |
+                |                | mà mình theo dõi    |                                  |
+                |                |                     |                                  |
+           Đăng video        -----------------------                                  |
+                |           |                     |                                      |
+                |        Xóa video        Chỉnh sửa video                             |
+                |           |                     |                                      |
+    --------------        -----------------------                                  |
+    |            |                    |                                                |
+  Mua sắm      Giỏ hàng          -----------------                                     |
+(gian hàng)                       |               |                                     |
+                                  Thêm sản phẩm vào giỏ hàng                          |
+                                  |               |                                     |
+                                  |         Tăng số lượng hàng trong giỏ hàng         |
+                                  |               |                                     |
+                                  |         Giảm số lượng hàng trong giỏ hàng         |
+                                  |               |                                     |
+                                  |         Chỉnh sửa thông tin giao hàng            |
+                                  |               |                                     |
+                                  |               Đặt hàng                              |
+                                  |               |                                     |
+                                  |          Xem lại lịch sử mua hàng                  |
+                                  |                                                      |
+                                  |                                                      |
+                             Quản lý gian hàng                                          |
+                                  |                                                      |
+                                  |                                                      |
+                           ----------------------------------                             |
+                           |                                |                             |
+                        Thêm sản phẩm                 Chỉnh sửa sản phẩm                    |
+                                |                                |                         |
+                           Xóa sản phẩm              Chức năng chỉ hiển thị sản phẩm của  |
+                                |                     những người mà mình theo dõi        |
+                        Chú thích:                                                       |
+                        -------> Các use case chính của người dùng                        |
+                        ---------> Các use case quản lý của người dùng                    |

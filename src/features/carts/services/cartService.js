@@ -37,21 +37,33 @@ export const addToCart = async (product) => {
     console.log(err);
   }
 };
-export const editProduct = async (formData) => {
+
+export const increaseProductQuantityCart = async (product) => {
   try {
-    console.log('formData của editProduct: ',formData);
-    await request.post("products/edit", formData  ); 
-    // const res = await request.post("products", formData  );  
+    // console.log('increaseProductQuantityCart: ',product);
+    await request.post("carts/inc_quantity", product); 
+    // const res = await request.post("products", formData );  
     // return res ;
 
   } catch (err) {
     console.log(err);
   }
 };
-
-export const deleteProduct = async (id) => {
+export const decreaseProductQuantityCart = async (product) => {
   try {
-    await request.remove(`products/${id}`);
+    // console.log('increaseProductQuantityCart: ',product);
+    await request.post("carts/dec_quantity", product); 
+    // const res = await request.post("products", formData );  
+    // return res ;
+
+  } catch (err) {
+    console.log(err);
+  }
+}; 
+
+export const deleteProductCart = async (product) => {
+  try {
+    await request.post(`carts/del_product_cart`, product);
 
   } catch (err) {
     console.log(err);

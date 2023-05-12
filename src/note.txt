@@ -1,0 +1,8 @@
+// mấy cái này được nè: 
+// Đặt hàng -> làm lẹ
+// Xem lại lịch sử mua hàng -> làm lẹ
+// Xem đơn hàng người khác đặt của mình, đánh dấu đã xem 
+
+// Xem danh sách video đã thích    
+// Xem danh sách sản phẩm của người dùng khác mà mình đang theo dõi
+//bấm dô notifications 
