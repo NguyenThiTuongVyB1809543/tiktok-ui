@@ -11,7 +11,7 @@ import { BsPlusCircle, BsTrash } from "react-icons/bs";
 import { FiMinusCircle, FiEdit } from 'react-icons/fi';
 import Cart from "~/pages/Cart";
 
-import Loader from "~/components/Core/Loader";
+// import Loader from "~/components/Core/Loader";
 import WrapperAuth from "~/components/WrapperAuth";
 import handleFollowFunc from "~/utils/handleFollow";
 import { getUsersService } from "~/features/accounts/services/getUsersService";
@@ -21,6 +21,12 @@ import { useSelector } from "react-redux";
 import { FaRegEdit } from "react-icons/fa"; 
 import { config } from "~/config";   
 import axios from "axios";  
+import EditAddress from "~/pages/EditAddress"; 
+
+
+import Error from "~/components/Core/Error";
+import Loader from "~/components/Core/Loader"; 
+
 function Purchase(cartdata) {
   const srcAvatar = "src/assets/images/";
   const user2 = localStorage.getItem("user"); 
@@ -30,7 +36,9 @@ function Purchase(cartdata) {
   const [loading, setLoading] = useState(true);
   const [purchase, setPurchase] = useState(false);
   const [user, setUser] = useState({});
-  const [backtocart, setBackToCart] = useState(false);
+  const [backtocart, setBackToCart] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [editaddress, setEditAddress] = useState(false);
 
   const [cartData , setCartData ] = useState(cartdata.cartdata);
    
@@ -50,6 +58,10 @@ function Purchase(cartdata) {
   let totalAmount = 0;
   const backToCart  = async () => {
     setBackToCart(true);
+  };
+  
+  const editAddress  = async () => {
+    setEditAddress(true);
   };
    
   return (
@@ -114,19 +126,42 @@ function Purchase(cartdata) {
           )} 
           <div> 
             <div className={styles.address}>
-              <h3 className={styles.subtitle}>Shipping Address</h3>
-              {/* //nhấp dô nút này sẽ hiện form nhập address
-              // !user.address ? (hiện form cho nhập addess, number phone) : (hiện thông tin address phone number) 
-              // nếu bấm nút edit thì hiện form cho nhập address number phone
-              //sau đó trả hiện lại address shiping 
-              //có thể viết ra thành 1 component luôn rồi nữa có gì hiện lại thoi */}
-              <Button outline large className={styles.button_edit} >  
+              <h3 className={styles.subtitle}>Shipping Address</h3> 
+              <Button outline large className={styles.button_edit} onClick={() => editAddress()} >  
                 <FiEdit/>
               </Button>
+              
             </div>
+
               <p className={styles.address_name}>{user.fullname}</p> 
-              <p className={styles.address_detail}>{user.address}</p> 
-              <p className={styles.address_phone}>{user.phone}</p> 
+               
+            <div>
+              {editaddress ? (
+                <EditAddress user={user} />
+              ) : (
+                <div></div>
+              )}
+            </div>
+              
+
+
+              <div>
+                {!user.address ? (
+                  <Error>You do not have information about address</Error>
+                  ) : (
+                    <p className={styles.address_detail}>{user.address}</p> 
+                  )
+                }
+              </div>
+              <div>
+                {!user.phone ? (
+                  <Error>You do not have information about phone number</Error>
+                  ) : (
+                    <p className={styles.address_phone}>{user.phone}</p> 
+                  )
+                }
+              </div>
+
           </div>
           
           
@@ -138,9 +173,14 @@ function Purchase(cartdata) {
             {/* //bấm nút Cancel thì hiện lại cart, thử coi được hogn, nếu hong được thì thử cách khác */}
             <Button outline large className={styles.button_cancle} onClick={() => backToCart()}> 
               Cancel 
-            </Button> 
-              {/* <Cart/> */}
-            <Button outline large className={styles.button_conf} > 
+            </Button>  
+              
+            <Button 
+              outline 
+              large 
+              className={styles.button_conf}  
+              disabled={!user.address || !user.phone}
+            > 
               Confirm 
             </Button>  
           </div>

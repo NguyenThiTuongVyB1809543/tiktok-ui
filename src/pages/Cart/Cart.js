@@ -100,7 +100,11 @@ function Cart() {
                   <div className={styles.list_video_container}>
                     <div className={styles.list_video}>
                       <div className={styles.title_wrapper}>
-                        <p className={styles.title}>{sellerData.sellerName}</p>
+                        <Link to={config.routes.boothLink(sellerData.sellerNickname)}>
+                          <p className={styles.title}>
+                            {sellerData.sellerName}
+                          </p> 
+                        </Link> 
                         <p className={styles.title}></p>
                       </div>
                       {sellerData.products &&
@@ -118,6 +122,7 @@ function Cart() {
                               />
                               <div className={styles.product_container}>
                                 <div className={styles.product_name}>
+                                  
                                   <p>{product.productName}</p>
                                 </div>
                                 <div className={styles.product_desc}>
