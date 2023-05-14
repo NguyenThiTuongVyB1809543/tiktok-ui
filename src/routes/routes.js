@@ -9,6 +9,7 @@ import { HeaderOnly } from "~/layouts";
 const Following = lazy(() => import("~/pages/Following"));
 const Home = lazy(() => import("~/pages/Home"));
 const Live = lazy(() => import("~/pages/Live"));
+const FollowedItems = lazy(() => import("~/pages/FollowedItems"));
 const NotFound = lazy(() => import("~/pages/NotFound"));
 const Profile = lazy(() => import("~/pages/Profile"));
 const Notification = lazy(() => import("~/pages/Notification"));
@@ -41,6 +42,7 @@ const publicRoutes = [
 
 const privateRoutes = [
   { path: config.routes.following, component: Following },
+  { path: config.routes.followeditems, component: FollowedItems },
   { path: config.routes.profile, component: Profile },
   { path: config.routes.notification, component: Notification },
   { path: config.routes.messages, component: Message },

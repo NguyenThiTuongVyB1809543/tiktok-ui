@@ -1,18 +1,14 @@
 import { request } from "~/utils/axiosInstance";
   
-// export const followingList = async (page = 1) => {
-//   try {
-//     const res = await request.get("me/followings", {
-//       params: {
-//         page
-//       },
-//     });
-//     // console.log('res: ', res);
-//     return res;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }; 
+export const productList = async () => {
+  try {
+    const res = await request.get("me/followings/products" );
+    // console.log('res: ', res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}; 
 
 export const userProduct = async (nickname) => {
   try {

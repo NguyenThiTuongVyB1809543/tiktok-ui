@@ -52,7 +52,7 @@ function Booth() {
   }, [user]);
 
 
-  //delete comment
+  //delete product
   const deleteProduct = async (product) => { 
     setLoading(true);
     await productService.deleteProduct(product._id); 

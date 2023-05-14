@@ -17,6 +17,7 @@ export const routes = {
   editProductLink: (product) => `/@${product._id}/edit_product`,
   
   live: "/live",
+  followeditems: "/followeditems",
   upload: "/upload",
   search: "/search",
   messages: "/messages",

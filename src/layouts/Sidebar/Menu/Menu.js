@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Menu.module.scss";
 import { BsCameraVideo, BsPeople } from "react-icons/bs";
+import { BiCalendarHeart} from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { config } from "~/config";
 import WrapperAuth from "~/components/WrapperAuth";
@@ -17,9 +18,12 @@ function Menu() {
           Following
         </Tab>
       </WrapperAuth>
-      <Tab to={config.routes.live} Icon={BsCameraVideo}>
-        Live
+      <Tab to={config.routes.followeditems} Icon={BiCalendarHeart}>
+        Followed Items
       </Tab>
+      {/* <Tab to={config.routes.live} Icon={BsCameraVideo}>
+        Live
+      </Tab> */}
     </nav>
   );
 }

@@ -108,12 +108,8 @@ function Notification() {
           </div>
         );
       case "comment":
-        return (
-          
-          <div>  
-            
-            
-
+        return ( 
+          <div>   
             <Link  to={config.routes.videoLink(notification.video)}  >
               <p className={styles.comment_text}>
                   <Link
@@ -175,13 +171,13 @@ function Notification() {
               listNotification.map((notification) => (
                 <div className={styles.comment_item_container} key={notification._id}>
                   <div className={styles.comment_content_container}>
-                    <Image src={notification.fromUser.avatar} />
-                    <div className={styles.comment_container}>
                       <Link
                         to={config.routes.profileLink(notification.fromUser.nickname)}
                         className={styles.account_item}
                       >    
+                    <Image src={notification.fromUser.avatar} />
                       </Link>
+                    <div className={styles.comment_container}>
                         {renderNotification(notification)} 
                         <p className={styles.created_at}>{formatDate(notification.createdAt)}</p> 
                     </div>
