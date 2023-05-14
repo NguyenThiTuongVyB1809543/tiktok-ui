@@ -14,6 +14,8 @@ const Profile = lazy(() => import("~/pages/Profile"));
 const Notification = lazy(() => import("~/pages/Notification"));
 const Message = lazy(() => import("~/pages/Message"));
 const Cart = lazy(() => import("~/pages/Cart"));
+const PurchaseHistory = lazy(() => import("~/pages/PurchaseHistory"));
+const Orders = lazy(() => import("~/pages/Orders"));
 const Booth = lazy(() => import("~/pages/Booth"));
 const EditProfile = lazy(() => import("~/pages/EditProfile"));
 const EditProduct = lazy(() => import("~/pages/EditProduct"));
@@ -43,6 +45,8 @@ const privateRoutes = [
   { path: config.routes.notification, component: Notification },
   { path: config.routes.messages, component: Message },
   { path: config.routes.cart, component: Cart },
+  { path: config.routes.purchasehistory, component: PurchaseHistory },
+  { path: config.routes.orders, component: Orders },
   { path: config.routes.booth, component: Booth },
   { path: config.routes.editprofile, component: EditProfile },
   { path: config.routes.editproduct, component: EditProduct },

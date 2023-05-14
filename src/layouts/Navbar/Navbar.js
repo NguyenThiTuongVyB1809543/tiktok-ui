@@ -63,7 +63,10 @@ function Navbar() {
         dispatch(userLogout());
         break;
       case "purchaseHistory":
-        navigate(config.routes.profileLink(user.nickname));
+        navigate(config.routes.purchasehistory);
+        break;
+        case "orders":
+        navigate(config.routes.orders);
         break;
       case "toProfile":
         navigate(config.routes.profileLink(user.nickname));

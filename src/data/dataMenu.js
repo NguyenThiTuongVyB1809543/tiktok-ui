@@ -4,6 +4,9 @@ import {
   FaRegKeyboard,
   FaRegUser,
   FaBitcoin,
+  FaCartArrowDown,
+  FaClipboardCheck,
+  FaCreditCard,
   FaRegSun,
   FaSignOutAlt,
   FaCode,
@@ -24,14 +27,14 @@ export const MENU_ITEMS_1 = [
       data: languages,
     },
   },
-  { title: "Feedback and help", icon: <FaQuestion /> },
-  { title: "Keyboard shortcuts", icon: <FaRegKeyboard /> },
+  // { title: "Feedback and help", icon: <FaQuestion /> },
+  // { title: "Keyboard shortcuts", icon: <FaRegKeyboard /> },
 ];
 
 export const MENU_ITEMS_2 = [
   { title: "View profile", icon: <FaRegUser />, type: "toProfile" },
-  { title: "Purchase history", icon: <FaBitcoin /> , type: "purchaseHistory" },
-  { title: "Settings", icon: <FaRegSun /> },
+  { title: "Purchase history", icon: <FaCartArrowDown /> , type: "purchaseHistory" },
+  { title: "Orders", icon: <FaClipboardCheck />, type: "orders" },
   ...MENU_ITEMS_1,
   { title: "Log out", icon: <FaSignOutAlt />, type: "logout", separate: true },
 ];

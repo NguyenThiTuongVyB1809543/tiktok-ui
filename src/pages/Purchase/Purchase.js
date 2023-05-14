@@ -15,7 +15,7 @@ import Cart from "~/pages/Cart";
 import WrapperAuth from "~/components/WrapperAuth";
 import handleFollowFunc from "~/utils/handleFollow";
 import { getUsersService } from "~/features/accounts/services/getUsersService";
-import { cartService } from "~/features/carts/services/cartService";
+import { orderService } from "~/features/orders/services/orderService";
 import { getFullName } from "~/utils/common";
 import { useSelector } from "react-redux";
 import { FaRegEdit } from "react-icons/fa"; 
@@ -23,6 +23,7 @@ import { config } from "~/config";
 import axios from "axios";  
 import EditAddress from "~/pages/EditAddress"; 
 
+import { useNavigate } from "react-router-dom";
 
 import Error from "~/components/Core/Error";
 import Loader from "~/components/Core/Loader"; 
@@ -36,6 +37,7 @@ function Purchase(cartdata) {
   const [loading, setLoading] = useState(true);
   const [purchase, setPurchase] = useState(false);
   const [user, setUser] = useState({});
+  const navigate = useNavigate(); 
   const [backtocart, setBackToCart] = useState(false); 
   const [isLoading, setIsLoading] = useState(false);
   const [editaddress, setEditAddress] = useState(false);
@@ -53,6 +55,11 @@ function Purchase(cartdata) {
     fetchApi();
   }, []);
   // console.log('backToCart: ', backToCart);
+
+  const confirmOrder = async () => {
+    await orderService.confirmOrder();  
+    navigate("/");
+  };
 
    
   let totalAmount = 0;
@@ -180,6 +187,7 @@ function Purchase(cartdata) {
               large 
               className={styles.button_conf}  
               disabled={!user.address || !user.phone}
+              onClick={() => confirmOrder()}
             > 
               Confirm 
             </Button>  

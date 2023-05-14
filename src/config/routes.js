@@ -21,6 +21,8 @@ export const routes = {
   search: "/search",
   messages: "/messages",
   cart: "/cart",
+  purchasehistory: "/purchasehistory",
+  orders: "/orders",
   notification: "/notification",
   login: "/login",
   register: "/register",
