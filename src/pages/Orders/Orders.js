@@ -53,6 +53,17 @@ function Orders() {
     setLoading(false);  
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
 
 
   console.log('orders', orders); 
@@ -82,6 +93,7 @@ function Orders() {
                 </div>
                 <p className={styles.title}>Address: {buyerData.user.address}</p>
                 <p className={styles.title}>Phone Number: {buyerData.user.phone}</p>
+                <p className={styles.created_at}>Time Order: {formatDate(buyerData.user.createdAt)}</p>
                 {buyerData.products &&
                   buyerData.products.map((product) => {
                      

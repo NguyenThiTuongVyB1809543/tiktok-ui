@@ -36,10 +36,10 @@ function EditProduct() {
       const result = await productService.getProduct(productId);
       setProduct(result); 
       setInitialValues({
-        productName: result.product_name,
-        description: result.description,
-        price: result.price,
-        namefile: result.product_img_url
+        productName: result.product_name || '',
+        description: result.description || '',
+        price: result.price || '',
+        namefile: result.product_img_url || '',
       });
     };
     
